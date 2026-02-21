@@ -1,0 +1,154 @@
+[
+  {
+    "coords": [
+    "1,327.92,484.61,230.29,8.97",
+    "1,317.96,495.57,195.80,8.97"
+    ],
+    "tag": "Goal",
+    "content": "This case study thus aims to explore the capability of MLLMs to understand abstract concepts in multimodal contexts."
+  },
+  {
+    "coords": [
+ "1,327.92,612.95,231.27,8.97",
+ "1,317.96,623.91,240.25,8.97",
+ "1,317.96,634.87,240.25,8.97",
+ "1,317.96,645.83,240.25,8.97",
+ "1,317.96,656.79,240.25,8.97",
+ "1,317.96,667.75,240.25,8.97",
+ "1,317.96,678.71,156.34,8.97"
+    ],
+    "tag": "Goal",
+    "content": "Echoing the emerging trend of LLM-assisted content analysis, our case study is one of the earliest efforts to leverage MLLMs for video content analysis: 1) We experiment with harnessing an MLLM for annotating abstract visual concepts with structured and explainable outputs; 2) We examine the MLLM's explanations and reveal contextual factors that affect MLLM's alignment with human understanding of abstract social concepts."
+  },
+  {
+    "coords": [
+ "2,53.80,561.31,241.76,8.97",
+ "2,53.80,572.27,240.25,8.97",
+ "2,53.80,583.23,100.93,8.97",
+ "2,156.98,583.23,137.07,8.97",
+ "2,53.80,592.20,175.54,10.95"
+    ],
+    "tag": "Method",
+    "content": "Using the query 'depression' with the YouTube Data API, we collected the metadata (e.g., title, channel, duration) of 3,892 videos uploaded by February 2024. We randomly selected 150 videos and downloaded them using YoutubeDownloader 1"
+  },
+  {
+    "coords": [
+ "2,232.11,594.19,61.93,8.97",
+ "2,53.80,605.15,240.24,8.97",
+ "2,53.80,616.11,241.77,8.97",
+ "2,53.80,627.07,241.63,8.97",
+ "2,53.80,638.02,240.48,8.97",
+ "2,53.80,648.98,119.66,8.97"
+    ],
+    "tag": "Method",
+    "content": "Liu et al. (2024) [38], , due to computational constraints and the current MLLM's limited context window to process videos [20], we applied FFmpeg [53] to extract representative keyframes in videos. "
+  },
+  {
+    "coords": [
+ "2,422.52,548.97,135.85,8.97",
+ "2,317.96,559.93,240.25,8.97",
+ "2,317.96,570.89,67.61,8.97"
+    ],
+    "tag": "Result",
+    "content": "This observation aligns with prior findings that Video LLMs generally underperform compared to Image LLMs. "
+  },
+  {
+    "coords": [
+"2,327.92,603.77,230.28,8.97",
+"2,317.96,614.73,240.42,8.97",
+"2,317.96,625.69,106.33,8.97",
+"2,376.96,614.73,2.94,8.97",
+"2,426.54,625.69,131.66,8.97",
+"2,317.96,636.65,240.25,8.97",
+"2,317.96,647.60,196.70,8.97"
+    ],
+    "tag": "Goal",
+    "content": "To investigate the MLLM's comprehension of abstract visual concepts (Table 1), operationalizing these concepts is essential for articulating them effectively.To address RQ1 and explore how to operationalize the concepts for MLLM prompt configuration, we tested four strategies and evaluated their effectiveness.  "
+  },
+  {
+    "coords": [
+"2,516.90,647.60,42.28,8.97",
+"2,317.62,658.56,240.81,8.97",
+"2,317.96,669.52,240.25,8.97",
+"2,317.96,680.48,75.48,8.97"
+    ],
+    "tag": "Method",
+    "content": "Specifically, we implemented four prompting configurations with progressively increasing levels of operational guidance to strike a balance between clarity and flexibility."
+  },
+  {
+    "coords": [
+"4,115.84,476.02,179.72,8.97",
+"4,53.80,486.97,240.25,8.97",
+"4,53.80,497.93,69.95,8.97"
+    ],
+    "tag": "Method",
+    "content": "Additionally, we identify two further factors contributing to human-AI (mis)alignment: concept complexity and the diversity of genres."
+  },
+  {
+    "coords": [
+"6,63.76,163.64,231.27,8.97",
+"6,53.47,174.60,242.10,8.97",
+"6,53.80,185.55,79.77,8.97"
+    ],
+    "tag": "Goal",
+    "content": "Additionally, when applying MLLM to analyze videos in the wild, we highlight that video style diversity is a crucial factor impacting model alignment."
+  },
+  {
+    "coords": [
+"6,167.09,218.43,126.95,8.97",
+"6,53.80,229.39,241.24,8.97",
+"6,53.80,240.35,240.25,8.9",
+";6,53.80,251.31,16.56,8.97",
+"6,53.80,251.31,13.87,8.97"
+    ],
+    "tag": "Result",
+    "content": "Our findings show that the MLLM can struggle to capture and interpret unconventional visual cues, such as the novel yet subtle suggestion of suicide depicted in Figure 3 (c)."
+  },
+  {
+    "coords": [
+"6,53.37,371.86,240.68,8.97",
+"6,53.53,382.81,241.50,8.97",
+"6,53.80,393.77,195.75,8.97"
+    ],
+    "tag": "Goal",
+    "content": "We emphasize three directions to improve human-AI alignment in (M)LLM-assisted visual content analysis: human-centered auditing, multimodal synthesis, and temporality incorporation."
+  },
+  {
+    "coords": [
+"6,415.84,86.92,142.37,8.97",
+"6,317.96,97.88,240.25,8.97",
+"6,317.96,108.84,107.52,8.97"
+    ],
+    "tag": "Goal",
+    "content": "Future work could explore MLLMs that directly interpret videos or a sequence of keyframes to provide more contextual information."
+  },
+  {
+    "coords": [
+"6,317.53,223.32,242.19,8.97",
+"6,317.96,234.28,240.25,8.97",
+"6,317.96,245.23,109.30,8.97"
+    ],
+    "tag": "Method",
+    "content": "We conduct one of the earliest case studies on leveraging Multimodal Large Language Models (MLLMs) to interpret abstract social concepts in video data."
+  },
+  {
+    "coords": [
+"6,415.93,343.86,142.27,8.97",
+"6,317.96,354.82,240.25,8.97",
+"6,317.96,365.78,168.26,8.97"
+    ],
+    "tag": "Result",
+    "content": "Our results underscore the importance of post-hoc auditing and human oversight to ensure agreement between AI outputs and human understanding."
+  },
+  {
+    "coords": [
+"6,488.15,365.78,70.05,8.97",
+"6,317.96,376.74,240.25,8.97",
+"6,317.96,387.70,240.25,8.97",
+"6,317.96,398.66,166.29,8.97"
+    ],
+    "tag": "Goal",
+    "content": "Future work should explore the integration of multimodal inputs and experiment with fine-tuning or in-context learning to enhance the model's ability to understand more complex social interactions."
+  }
+
+]

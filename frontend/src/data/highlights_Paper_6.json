@@ -1,0 +1,42 @@
+[
+  {
+    "coords": [
+   "2,268.02,87.79,27.54,7.94",
+   "2,53.80,98.75,241.76,7.94",
+   "2,53.80,109.71,240.25,7.94",
+   "2,53.80,120.67,28.54,7.94"
+    ],
+    "tag": "Method",
+    "content": "Specifically, we utilize an orchestration of multiple LLM agents to collaborate on complex conflict resolution and preference adaptation tasks [12,13]."
+  },
+  {
+    "coords": [
+ "2,161.60,197.38,132.45,7.94",
+ "2,53.80,208.34,241.76,7.94",
+ "2,53.80,219.30,241.63,7.94"
+    ],
+    "tag": "Method",
+    "content": "We then present MAP (Multi-Agent for Multi-User Personalization), an implementation of our workflow using a collaborative orchestration of LLM-powered agents."
+  },
+  {
+    "coords": [
+"2,243.04,621.06,51.01,7.94",
+"2,53.80,632.02,240.25,7.94",
+"2,53.80,642.98,241.76,7.94",
+"2,53.80,653.93,156.87,7.94"
+    ],
+    "tag": "Method",
+    "content": "Each scenario involves interactions between an AI system and three hypothetical users, each with a weekly schedule and a set of preferences dictating how specific tasks should be handled."
+  },
+  {
+    "coords": [
+"2,327.92,447.16,231.80,8.02",
+"2,317.96,458.18,240.48,7.94",
+"2,317.96,469.14,125.86,7.94"
+    ],
+    "tag": "Method",
+    "content": "Specifically, Ross [36] introduces an Action Evaluation methodology that integrates goal setting, monitoring, and evaluation directly into the conflict resolution process."
+  }
+  
+  
+]

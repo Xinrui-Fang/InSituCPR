@@ -1,0 +1,180 @@
+[
+  {
+    "coords": [
+    "1,452.52,534.16,107.31,9.30",
+    "1,318.00,545.07,240.40,9.30",
+    "1,318.00,555.99,241.59,9.30",
+    "1,318.00,567.04,37.25,9.30"
+    ],
+    "tag": "Goal",
+    "content": "With prior cycles of automation hype and setbacks in mind, we aim to investigate whether UX designers are aware of the potential ironies associated with LLMdriven AI."
+  },
+  {
+    "coords": [
+   "1,327.96,665.67,230.15,9.30",
+   "1,318.00,677.25,205.35,8.64"
+    ],
+    "tag": "Goal",
+    "content": "In this work, we explore the following questions: What are UX designers' perspectives on GenAI's impact on UX practice?"
+  },
+  {
+    "coords": [
+  "2,534.24,232.71,23.90,9.30",
+  "2,318.00,243.63,241.71,9.30",
+  "2,318.00,254.55,194.69,9.30"
+    ],
+    "tag": "Goal",
+    "content": "In this section, we highlight two key areas of prior work that provide critical context for understanding AI's role in UX practice."
+  },
+  {
+    "coords": [
+  "2,514.20,254.55,45.51,9.30",
+  "2,318.00,265.59,240.34,9.30",
+  "2,318.00,276.51,241.83,9.30",
+  "2,318.00,287.43,240.34,9.30",
+  "2,318.00,298.47,73.13,9.30",
+  "2,372.00,276.51,9.40,9.30",
+  "2,392.88,298.47,165.32,9.30",
+  "2,318.00,309.39,241.49,9.30"
+    ],
+    "tag": "Method",
+    "content": "First, we discuss the ironies of automation, a foundational concept introduced by Bainbridge, which describes paradoxical effects of automation that can increase complexity and cognitive demands rather than reducing them.hese ironies provide a lens through which to examine how AI might alter UX design work in unexpected ways."
+  },
+  {
+    "coords": [
+  "2,318.00,320.31,241.71,9.30",
+  "2,318.00,331.35,240.54,9.30",
+  "2,318.00,342.27,241.71,9.30",
+  "2,318.00,353.19,40.01,9.30",
+  "2,345.36,353.19,9.49,9.30"
+    ],
+    "tag": "Method",
+    "content": "Second, we address the function allocation problem and the persistent substitution myth, which assumes that automation can directly replace human tasks without fundamentally changing system dynamics [7]"
+  },
+  {
+    "coords": [
+  "2,359.52,353.19,200.19,9.30",
+  "2,318.00,364.23,241.13,9.30",
+  "2,318.00,375.15,180.65,9.30"
+    ],
+    "tag": "Result",
+    "content": "This perspective is critical for understanding the limitations of AI-driven design tools and the need for a more integrated, cooperative approach to human-AI collaboration."
+  },
+  {
+    "coords": [
+  "3,119.16,305.68,175.11,9.30",
+  "3,53.76,316.60,240.29,9.30",
+  "3,53.76,327.64,241.83,9.30",
+  "3,53.76,338.56,121.49,9.30"
+    ],
+    "tag": "Goal",
+    "content": "The fundamental premise of Bainbridge's work is that automation, while intended to simplify tasks and reduce human error, often introduces new complexities and critical dependencies on human oversight."
+  },
+  {
+    "coords": [
+  "3,367.80,232.59,190.42,9.30",
+  "3,318.00,243.51,240.19,9.30",
+  "3,318.00,254.55,167.45,9.30"
+    ],
+    "tag": "Goal",
+    "content": "By examining these discussions, we aim to uncover both explicit perspectives and underlying concerns that may not yet be fully articulated in academic literature."
+  },
+  {
+    "coords": [
+  "3,487.92,254.55,70.25,9.30",
+  "3,318.00,265.47,240.24,9.30",
+  "3,318.00,276.39,241.71,9.30",
+  "3,318.00,287.43,240.40,9.30",
+  "3,318.00,298.35,240.14,9.30",
+  "3,317.64,309.27,240.66,9.30",
+  "3,318.00,320.31,40.25,9.30",
+  "3,360.12,320.31,198.26,9.30",
+  "3,318.00,331.23,225.29,9.30"
+    ],
+    "tag": "Method",
+    "content": "To achieve this, we employed a qualitative content analysis approach, drawing from two complementary sources: (1) online articles and blog posts authored by UX practitioners discussing the implications of AI in UX design, and (2) Reddit discussions from UX-focused communities where practitioners openly debate and reflect on AI's influence on their work. These sources provide a rich dataset that captures both formal reflections and informal, community-driven discourse."
+  },
+  {
+    "coords": [
+  "3,318.00,367.71,240.26,9.30",
+  "3,318.00,378.75,192.89,9.30",
+  "3,509.76,378.75,48.43,9.30",
+  "3,318.00,389.67,244.80,9.30",
+  "3,318.00,400.59,240.30,9.30",
+  "3,317.64,411.63,190.01,9.30"
+    ],
+    "tag": "Method",
+    "content": "For online articles, we conducted searches using a combination of keywords, including 'UX, ' 'AI, ' 'design, ' and 'LLMs.' The dataset comprises publicly available articles from platforms such as Medium and community-sourced content websites, specifically focusing on AI technologies and their impact on UX designers."
+  },
+  {
+    "coords": [
+ "3,510.84,411.63,47.50,9.30",
+ "3,318.00,422.55,241.71,9.30",
+ "3,318.00,433.47,194.45,9.30"
+    ],
+    "tag": "Result",
+    "content": "We collected over 120 written works published in the past three years by selfidentified UX practitioners and experts in the field."
+  },
+  {
+    "coords": [
+ "4,168.48,404.32,126.99,9.30",
+ "4,53.76,415.24,240.32,9.30",
+ "4,52.44,426.16,242.50,9.30",
+ "4,53.76,437.85,132.04,8.64"
+    ],
+    "tag": "Result",
+    "content": "Similarly, other practitioners express that AI's ability to take over routine tasks enables them to 'get more UX work done' and 'put greater emphasis on the strategic and creative aspects of their work."
+  },
+  {
+    "coords": [
+ "4,218.88,568.72,75.17,9.30",
+ "4,53.76,579.64,241.83,9.30",
+ "4,53.76,590.55,240.32,9.30",
+ "4,53.76,602.25,240.31,8.64",
+ "4,53.76,613.17,91.48,8.64"
+    ],
+    "tag": "Method",
+    "content": "Additionally, some practitioners view AI as a way to minimize time-consuming, repetitive UX-related tasks, as another user explained: 'I've been looking into ways to use AI tools to be more effective and efficient with my time as a UX professional."
+  },
+  {
+    "coords": [
+ "4,485.04,97.47,74.67,9.30",
+ "4,318.00,108.39,240.30,9.30",
+ "4,318.00,119.31,236.21,9.30"
+    ],
+    "tag": "Result",
+    "content": "Despite these concerns, the overall sentiment remains largely positive, with many designers embracing AI as a tool for automating repetitive tasks."
+  },
+  {
+    "coords": [
+ "4,363.96,470.73,194.16,8.64",
+ "4,318.00,481.65,127.12,8.64"
+    ],
+    "tag": "Method",
+    "content": "I have constant conversations on ideas and data that we both collect, and we design together."
+  },
+  {
+    "coords": [
+ "5,53.76,376.84,240.26,9.30",
+ "5,53.76,387.88,51.05,9.30",
+ "5,108.12,387.88,187.47,9.30",
+ "5,53.76,398.80,240.22,9.30",
+ "5,53.76,409.72,240.14,9.30",
+ "5,53.76,420.76,24.41,9.30"
+    ],
+    "tag": "Result",
+    "content": "Our findings highlight both enthusiasm and concern regarding AI in UX design. While AI enhances efficiency and creativity, practitioners also raise issues of de-skilling, cognitive offloading, and shifting responsibilities-echoing historical automation challenges [3, 30]"
+  },
+  {
+    "coords": [
+ "5,53.40,524.79,242.07,9.30",
+ "5,53.76,535.84,241.18,9.30",
+ "5,53.76,546.76,240.16,9.30",
+ "5,53.76,557.67,221.09,9.30"
+    ],
+    "tag": "Result",
+    "content": "A key finding from our analysis is that many UX practitioners anticipate AI taking over routine tasks such as 'help with user research, prototyping, and usability testing tasks, ' thereby enabling designers to focus on more strategic aspects of their work."
+  }
+
+  
+]

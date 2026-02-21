@@ -1,0 +1,200 @@
+[
+  {
+    "coords": [
+   "1,116.02,559.03,178.02,7.94",
+   "1,53.80,569.99,240.25,7.94",
+   "1,53.80,580.94,86.44,7.94"
+    ],
+    "tag": "Result",
+    "content": "Nevertheless, the exponential growth in available data poses significant challenges in promoting transparency and justice in the digital age."
+  },
+  {
+    "coords": [
+   "1,327.92,236.46,231.80,7.94",
+   "1,317.96,247.42,241.76,7.94",
+   "1,317.96,258.37,240.48,7.94",
+   "1,317.96,269.33,59.43,7.94"
+    ],
+    "tag": "Goal",
+    "content": "This study examines how investigative journalists integrate automation and AI into their daily workflows, focusing on automation tasks, practical use cases, and the limitations of the tools they already employ."
+  },
+  {
+    "coords": [
+ "1,380.08,269.33,179.63,7.94",
+ "1,317.96,280.29,240.25,7.94",
+ "1,317.96,291.25,67.31,7.94"
+    ],
+    "tag": "Method",
+    "content": "In this work, we do not constrain AI to generative models, but we consider AI as any system capable of doing autonomous work."
+  },
+  {
+    "coords": [
+ "1,387.42,291.25,172.30,7.94",
+ "1,317.96,302.21,240.25,7.94",
+ "1,317.96,313.17,188.52,7.94",
+ "1,508.72,313.17,49.48,7.94",
+ "1,317.96,324.13,240.25,7.94",
+ "1,317.96,335.09,240.41,7.94",
+ "1,317.96,346.05,68.40,7.94"
+    ],
+    "tag": "Goal",
+    "content": "Our approach aims to identify end-user requirements and features to guide the design and development of an automation framework for investigative journalism. To the best of our knowledge, this paper is among the first to involve investigative journalists deeply in a tool-based co-creation process through user studies interviews. "
+  },
+  {
+    "coords": [
+"1,382.22,455.63,177.49,7.94",
+"1,317.96,466.59,165.80,7.94"
+    ],
+    "tag": "Goal",
+    "content": "The goal is to empower users, regardless of background, to automate web-based tasks easily. "
+  },
+  {
+    "coords": [
+"1,486.39,466.59,71.81,7.94",
+"1,317.96,477.55,240.25,7.94",
+"1,317.96,488.51,241.62,7.94"
+    ],
+    "tag": "Method",
+    "content": "We used a video of the prototype during interviews to illustrate web automation use cases, to showcase the prototype's features, and to elicit responses."
+  },
+  {
+    "coords": [
+"2,63.76,602.86,230.28,7.94",
+"2,53.80,613.82,241.24,7.94",
+"2,53.80,624.78,157.23,7.94"
+    ],
+    "tag": "Goal",
+    "content": "Kasica et al. thoroughly interviewed 36 data journalists to explore how they work and process dirty data (i.e., incomplete, inaccurate, or inconsistent information [7]."
+  },
+  {
+    "coords": [
+"2,222.30,646.70,71.92,7.94",
+"2,53.80,657.66,240.25,7.94",
+"2,53.80,668.62,193.50,7.94"
+    ],
+    "tag": "Method",
+    "content": "We follow a similar approach but prioritize revealing practical use cases rather than comprehensively analyzing the data workflow chain."
+  },
+  {
+    "coords": [
+"2,63.76,679.57,230.28,7.94",
+"2,53.80,690.53,240.24,7.94",
+"2,53.80,701.49,116.29,7.94"
+    ],
+    "tag": "Goal",
+    "content": "Rather than simply exploring automation trends in investigative journalism, we aim to create a framework to develop AI-powered tools specifically for journalists."
+  },
+  {
+    "coords": [
+"2,317.96,175.46,241.76,7.94",
+"2,317.96,186.42,241.76,7.94",
+"2,317.96,197.38,35.62,7.94"
+    ],
+    "tag": "Method",
+    "content": "Our study shares this collaborative approach with a stronger usercentered focus by deeply involving journalists in the problem formulation."
+  },
+  {
+    "coords": [
+"2,317.69,277.75,240.51,7.94",
+"2,317.96,288.71,240.25,7.94",
+"2,317.96,299.67,240.24,7.94",
+"2,317.62,310.62,110.22,7.94"
+    ],
+    "tag": "Goal",
+    "content": "This paper aims to place journalists at the core of the research process, actively involving them in identifying areas where we can integrate automation into their tasks and engaging journalists with an elicitation prototype."
+  },
+  {
+    "coords": [
+"3,53.80,515.19,240.25,7.94",
+"3,53.80,526.15,240.24,7.94",
+"3,53.80,537.11,90.72,7.94",
+"3,146.77,537.11,148.79,7.94",
+"3,53.80,548.07,240.25,7.94",
+"3,53.80,559.03,41.35,7.94"
+    ],
+    "tag": "Goal",
+    "content": "Finally, we tasked participants to imagine an ideal tool tailored to their needs, considering both computational and human resources available for its creation. In a storytelling setting, we aimed to explore practical journalistic use cases and point out any potential limitations."
+  },
+  {
+    "coords": [
+"3,282.15,657.66,11.89,7.94",
+"3,53.80,668.62,240.25,7.94",
+"3,53.80,679.57,132.90,7.94"
+    ],
+    "tag": "Method",
+    "content": "We applied qualitative content analysis to identify key themes through inductive coding following [42,43]."
+  },
+  {
+    "coords": [
+"5,327.92,109.71,230.46,7.94",
+"5,317.96,120.67,121.86,7.94"
+    ],
+    "tag": "Method",
+    "content": "We provide a set of journalistic use cases that can act as a basis for developing new automation tools."
+  },
+  {
+    "coords": [
+"5,442.05,120.67,117.66,7.94",
+"5,317.96,131.63,240.41,7.94",
+"5,317.96,142.59,56.65,7.94"
+    ],
+    "tag": "Result",
+    "content": "Our findings showed that the reported use cases are mainly related to information gathering rather than reporting."
+  },
+  {
+    "coords": [
+"5,327.92,312.45,230.28,7.94",
+"5,317.96,323.41,241.76,7.94",
+"5,317.96,334.37,120.20,7.94"
+    ],
+    "tag": "Result",
+    "content": "Our study reveals that a demonstration-based LLM system could simplify information extraction by automating repetitive tasks, significantly speeding up research."
+  },
+  {
+    "coords": [
+"5,423.27,454.92,134.94,7.94",
+"5,317.96,465.88,240.24,7.94",
+"5,317.96,476.83,240.25,7.94",
+"5,317.96,487.79,78.68,7.94"
+    ],
+    "tag": "Goal",
+    "content": "Furthermore, researchers can explore alternative methods to share automation workflows as described by 03, which can encourage collaboration among news outlets and enhance privacy."
+  },
+  {
+    "coords": [
+"6,181.33,635.74,113.67,7.94",
+"6,53.80,646.70,240.25,7.94",
+"6,53.80,657.66,240.48,7.94",
+"6,53.80,668.62,83.43,7.94"
+    ],
+    "tag": "Method",
+    "content": "We leveraged the practitioners' technical backgrounds and expertise to inform our future goal of transforming their workflows into tools targeting less technically trained news workers."
+  },
+  {
+    "coords": [
+"6,317.69,101.49,240.52,7.94",
+"6,317.64,112.45,242.08,7.94",
+"6,317.96,123.41,54.17,7.94"
+    ],
+    "tag": "Goal",
+    "content": "This paper serves as a starting point for exploring how generative AI and PbD can assist journalists in data collection and automation processes."
+  },
+  {
+    "coords": [
+"6,327.92,145.33,231.80,7.94",
+"6,317.96,156.29,240.25,7.94",
+"6,317.96,167.25,184.75,7.94"
+    ],
+    "tag": "Goal",
+    "content": "Our findings highlight the potential for journalists to adopt automation technologies that simplify data retrieval from multiple sources without the need for programming skills."
+  },
+  {
+    "coords": [
+"6,505.09,167.25,53.12,7.94",
+"6,317.96,178.20,240.25,7.94",
+"6,317.96,189.16,128.43,7.94"
+    ],
+    "tag": "Result",
+    "content": "We encourage future work to examine the potential of PbD in the context of automating journalistic workflows."
+  }
+]

@@ -1,0 +1,193 @@
+[
+  {
+    "coords": [
+  "2,252.59,279.37,42.97,8.97",
+  "2,53.80,290.32,240.25,8.97",
+  "2,53.80,301.28,240.25,8.97",
+  "2,53.80,312.24,62.91,8.97"
+    ],
+    "tag": "Result",
+    "content": "This underscores the process of detecting and addressing these issues, or AI auditing, where auditors analyze system outputs for adversarial inputs [5,25,33]"
+  },
+  {
+    "coords": [
+"2,248.82,553.34,46.21,8.97",
+"2,53.80,564.30,240.25",
+"8.97;2,53.80,575.26,240.25,8.97",
+"2,53.80,586.21,202.11,8.97"
+    ],
+    "tag": "Result",
+    "content": "Additionally, our observations from formative study with five auditors indicate that many auditors often rely on intuition or personal experience during the auditing process without a formal approach."
+  },
+  {
+    "coords": [
+"2,63.76,617.11,230.46,10.95",
+"2,53.80,630.05,240.24,8.97",
+"2,53.80,641.01,56.34,8.97"
+    ],
+    "tag": "Goal",
+    "content": "In this paper, we propose Vipera 1 , an interactive system for streamlining and enhancing the systematicness of large-scale T2I model auditing."
+  },
+    {
+    "coords": [
+"2,112.38,641.01,181.66,8.97",
+"2,53.80,651.97,240.25,8.97",
+"2,53.80,662.93,240.25,8.97",
+"2,53.80,673.89,37.49,8.97",
+"2,93.53,673.89,202.03,8.97",
+"2,53.80,684.84,240.24,8.97",
+"2,53.67,700.60,198.31,8.49",
+"2,317.96,86.92,139.93,8.97"
+    ],
+    "tag": "Method",
+    "content": "Vipera facilitates structured multi-faceted analysis through the visual cue of scene graph, where the auditing criteria are organized hierarchically and associated with scenic semantics of images.Additionally, Vipera incorporates LLM-powered auditing suggestions to uncover new avenues for analysis and facilitate 1 Vipera stands for 'Visual Intelligence-Promoted End User Auditing' exploration within the auditing space."
+  },
+    {
+    "coords": [
+"2,364.08,141.72,195.64,8.97",
+"2,317.96,152.68,240.25,8.97",
+"2,317.96,163.64,195.97,8.97"
+    ],
+    "tag": "Goal",
+    "content": "We hope that Vipera could reveal the abundant opportunities and contribute innovative insights to the emerging field of GenAI auditing and human-AI collaborative auditing."
+  },
+   {
+    "coords": [
+"2,358.52,280.08,199.68,8.97",
+"2,317.96,291.03,241.76,8.97",
+"2,317.96,301.99,240.42,8.97",
+"2,317.96,312.95,193.77,8.97"
+    ],
+    "tag": "Result",
+    "content": "Recent research emphasizes the value of conducting AI audits to ensure more safe and responsible GenAI, often even involving general end users in the auditing process, as they can uncover overlooked cases and provide insights."
+  },
+   {
+    "coords": [
+"2,413.47,521.17,144.73,8.97",
+"2,317.96,532.13,240.24,8.97",
+"2,317.96,543.09,171.40,8.97"
+    ],
+    "tag": "Method",
+    "content": "To address this, Vipera integrates visual cues and AI-driven auditing suggestions, facilitating a structured and systematic exploration of auditing criteria."
+  },
+     {
+    "coords": [
+"3,53.53,356.04,240.51,8.97",
+"3,53.80,367.00,240.25,8.97",
+"3,53.80,377.96,240.25,8.97",
+"3,53.53,388.92,240.52,8.97",
+"3,53.80,399.88,240.25,8.97",
+"3,53.80,410.83,29.31,8.97"
+    ],
+    "tag": "Goal",
+    "content": "To inform Vipera's design, we conducted a formative study with two main objectives: (1) understanding the common practices and challenges auditors face when evaluating generative text-to-image (T2I) models, and (2) testing our hypothesis that a scene graph as a visual aid could enhance insights and structure in the auditing process."
+  },
+     {
+    "coords": [
+"4,476.04,649.16,82.16,8.97",
+"4,317.96,660.12,240.25,8.97",
+"4,317.96,671.08,47.49,8.97"
+    ],
+    "tag": "Method",
+    "content": "Note that we use a tree layout with a maximum of 5 leaf nodes to avoid overwhelming the users (DG1)."
+  },
+   {
+    "coords": [
+"5,53.37,473.36,240.91,8.97",
+"5,53.80,484.32,100.58,8.97"
+    ],
+    "tag": "Method",
+    "content": "We conducted an observational user study to evaluate the usability and effectiveness of Vipera."
+  },
+   {
+    "coords": [
+"5,83.02,623.91,211.03,8.97",
+"5,53.80,634.87,240.48,8.97",
+"5,53.47,645.83,240.58,8.97",
+"5,53.80,656.79,240.47,8.97",
+"5,53.80,667.75,31.85,8.97"
+    ],
+    "tag": "Method",
+    "content": "Afterwards, participants were provided with 30 minutes to audit the Stable Diffusion XL model with Vipera, during which they were asked to get as many auditing insights as possible and note down necessary evidence for their report using Vipera's bookmark features."
+  },
+   {
+    "coords": [
+"5,317.96,100.62,240.48,8.97",
+"5,317.96,111.58,240.25,8.97",
+"5,317.73,122.54,176.10,8.97"
+    ],
+    "tag": "Result",
+    "content": "In general, participants reached a consensus in Vipera's usability and they recognized the intuitiveness and effectiveness of Vipera's visualizations in facilitating image sensemaking."
+  },
+     {
+    "coords": [
+"5,327.92,145.55,230.29,7.70",
+"5,317.96,156.51,190.36,7.70",
+"5,510.61,155.42,49.10,8.97",
+"5,317.96,166.38,240.25,8.97",
+"5,317.62,177.34,182.27,8.97"
+    ],
+    "tag": "Goal",
+    "content": "Vipera enhanced both the exploration of various auditing criteria and the validation of user hypotheses. Our observations indicated that participants commonly began by assessing well-known social biases, such as gender and race."
+  },
+    {
+    "coords": [
+"6,53.80,100.62,240.25,8.97",
+"6,53.80,111.58,240.25,8.97",
+"6,53.80,122.54,76.79,8.97"
+    ],
+    "tag": "Method",
+    "content": "In this section, we discuss the lessons learned from the design process and participants' feedback, as well as the directions we plan for future work."
+  },
+   {
+    "coords": [
+"6,146.74,221.17,147.31,8.97",
+"6,53.80,232.13,240.25,8.97",
+"6,53.80,243.09,65.85,8.97"
+    ],
+    "tag": "Method",
+    "content": "We plan to implement these features and encourage users to share their auditing reports to foster inspiration among peers [12]."
+  },
+    {
+    "coords": [
+"6,98.66,286.92,196.90,8.97",
+"6,53.80,297.88,240.25,8.97",
+"6,53.80,308.84,241.76,8.97",
+"6,53.80,319.80,44.23,8.97"
+    ],
+    "tag": "Method",
+    "content": "We plan to address this issue by improving the finegrained control of interactions, including allowing users to set the application scope for each criterion and compare prompts in specified criteria."
+  },
+    {
+    "coords": [
+"6,208.42,352.68,85.62,8.97",
+"6,53.47,363.64,240.58,8.97",
+"6,53.80,374.60,236.11,8.97",
+"6,63.76,386.65,231.89,7.70",
+"6,53.80,397.61,63.31,7.70"
+    ],
+    "tag": "Goal",
+    "content": "We also plan to explore ways to better integrate Vipera into auditors' existing workflows to support a more customized and agile auditing process "
+  },
+      {
+    "coords": [
+"6,142.98,473.23,151.31,8.97",
+"6,53.80,484.18,240.25,8.97",
+"6,53.80,495.14,159.43,8.97",
+"6,215.47,495.14,78.58,8.97",
+"6,53.80,506.10,240.25,8.97",
+"6,53.80,517.06,55.42,8.97"
+    ],
+    "tag": "Method",
+    "content": "Additionally, can it alert users when they should delve deeper into a specific area or when to adopt a more divergent approach to audit more broadly? We envision creating theories, frameworks, or methodologies through better studying the user needs."
+  },
+       {
+    "coords": [
+"6,371.06,108.84,187.15,8.97",
+"6,317.96,119.80,240.25,8.97",
+"6,317.96,130.76,176.88,8.97"
+    ],
+    "tag": "Result",
+    "content": "We believe Vipera will contribute significantly to the advancement of end-user auditing and foster more responsible human-AI collaboration in creative applications."
+  }
+]

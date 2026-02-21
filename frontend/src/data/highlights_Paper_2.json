@@ -1,0 +1,254 @@
+[
+  {
+    "coords": [
+      "1,327.92,640.40,231.80,7.94",
+      "1,317.96,651.29,240.41,8.02",
+      "1,317.96,662.31,241.76,7.94",
+      "1,317.96,673.27,38.95,7.94"
+    ],
+    "tag": "Goal",
+    "content": "To overcome hallucination and linguistic challenges, we developed and evaluated BanglAssist: a multilingual GenAI customer service agent designed to enhance user experience in Banglish interactions."
+  },
+  
+  {
+    "coords": [
+     "2,63.76,296.01,230.28,7.94",
+     "2,53.80,306.97,240.41,7.94",
+     "2,53.80,317.93,145.68,7.94"
+    ],
+    "tag": "Method",
+    "content": "Preliminary evaluations of BanglAssist were performed using quantitative and qualitative studies based on exported customer service logs provided by MultilingualCo."
+  },
+  {
+    "coords": [
+     "2,63.76,296.01,230.28,7.94",
+     "2,53.80,306.97,240.41,7.94",
+     "2,53.80,317.93,145.68,7.94"
+    ],
+    "tag": "Method",
+    "content": "Preliminary evaluations of BanglAssist were performed using quantitative and qualitative studies based on exported customer service logs provided by MultilingualCo."
+  },
+  {
+    "coords": [
+     "2,53.53,350.81,240.51,7.94",
+     "2,53.80,361.77,44.84,7.94"
+    ],
+    "tag": "Result",
+    "content": "The overall answer accuracy of 0.81 attests to the effectiveness of BanglAssist."
+  },
+  {
+    "coords": [
+    "2,100.88,361.77,194.15,7.94",
+    "2,53.80,372.72,189.43,7.94"
+    ],
+    "tag": "Result",
+    "content": "It correctly answered in the query language (Bengali, English, and Banglish) and script 100% of the time."
+  },
+  {
+    "coords": [
+    "2,245.62,372.72,48.43,7.94",
+    "2,53.80,383.68,240.25,7.94",
+    "2,53.80,394.64,240.25,7.94",
+    "2,53.80,405.60,240.25,7.94",
+    "2,53.80,416.56,29.98,7.94"
+    ],
+    "tag": "Result",
+    "content": "Our retrieval results also highlight the effectiveness of translating multilingual queries into English before retrieval, even with the application of multilingual models, especially when addressing the complexities of CSW."
+  },
+  {
+    "coords": [
+   "2,86.05,416.56,208.00,7.94",
+   "2,53.80,427.52,241.76,7.94",
+   "2,53.80,438.48,240.25,7.94",
+   "2,53.80,449.44,240.41,7.94",
+   "2,53.80,460.40,83.95,7.94"
+    ],
+    "tag": "Result",
+    "content": "Finally, our findings underscore the potential for GenAI systems to adapt to complex linguistic environments through appropriate design when paired with high-quality contextual data that focus on information correctness and exhaustiveness rather than form and delivery."
+  },
+  {
+    "coords": [
+    "2,63.76,482.31,230.28,7.94",
+    "2,53.80,493.27,240.25,7.94",
+    "2,53.80,504.23,240.25,7.94",
+    "2,53.80,515.19,87.17,7.94"
+    ],
+    "tag": "Goal",
+    "content": "The main contribution of this study is to advance the current HCI discourse by leveraging NLP technologies tailored to address the needs of communities less represented within the global digital and linguistic landscape."
+  },
+  {
+    "coords": [
+   "2,142.74,515.19,152.82,7.94",
+   "2,53.80,526.15,240.25,7.94",
+   "2,53.80,537.11,240.48,7.94",
+   "2,53.80,548.07,80.46,7.94"
+    ],
+    "tag": "Goal",
+    "content": "This work inspires the development of personalized, contextualized, accessible, and scalable multilingual and multicultural solutions, thereby enhancing inclusivity and equity in digital interactions."
+  },
+  {
+    "coords": [
+   "2,552.26,515.19,6.26,7.94",
+   "2,317.96,526.15,241.76,7.94",
+   "2,317.96,537.11,240.25,7.94",
+   "2,317.96,548.07,240.42,7.94",
+   "2,317.96,559.03,193.49,7.94"
+    ],
+    "tag": "Goal",
+    "content": "A key objective of these models is to transfer knowledge from highresource languages, which are well represented in training data, to low-resource languages, which are underrepresented, striving for comparable performance across all languages."
+  },
+  {
+    "coords": [
+   "3,63.76,109.71,230.28,7.94",
+   "3,53.80,120.67,240.24,7.94",
+   "3,53.80,131.63,241.76,7.94",
+   "3,53.80,142.59,241.63,7.94"
+    ],
+    "tag": "Goal",
+    "content": "While prior research has evaluated LLMs and embedding models on existing datasets in the context of CSW [36, 39], our study aims to provide fresh insights by examining the performance of stateof-the-art models in real-world applications like customer service."
+  },
+  {
+    "coords": [
+    "3,53.80,153.55,241.23,7.94",
+    "3,53.47,164.51,177.79,7.94"
+    ],
+    "tag": "Method",
+    "content": "Specifically, we focus on Banglish, a blend of Bengali and English, which exemplifies the complexities of CSW [20]."
+  },
+  {
+    "coords": [
+      "3,53.53,246.70,240.51,7.94",
+      "3,53.47,257.66,241.12,7.94",
+      "3,53.80,268.62,240.25,7.94",
+      "3,53.80,279.57,240.24,7.94",
+      "3,53.80,290.53,110.50,7.94"
+    ],
+    "tag": "Method",
+    "content": "To address hallucinations and poor performance when dealing with CSW and dialects, two workarounds have been proposed: 1) manipulating the prompt to provide task-specific instructions and relevant context [18, 28] and 2) fine-tuning the pre-trained model on a task-specific dataset [40]."
+  },
+  {
+    "coords": [
+    "3,63.76,301.49,231.80,7.94",
+    "3,53.80,312.45,241.23,7.94",
+    "3,53.80,323.41,240.25,7.94",
+    "3,53.80,334.37,241.76,7.94",
+    "3,53.80,345.33,241.26,7.94",
+    "3,53.80,356.29,63.11,7.94"
+    ],
+    "tag": "Method",
+    "content": "Some of the most common prompt engineering techniques in-clude few-shot prompting and chain-of-thought (CoT) prompting, in which the user instructs the LLM to execute a task by providing examples of how it should do so and “a coherent series of interme- diate reasoning steps that lead to the final answer for a problem,” respectively [34]. In our solution, we applied role-play prompting [ 14] to ensure that BanglAssist acts as MultilingualCo’s customer service agent and few-shot prompting to improve its ability to match the user’s language and script."
+  },
+  {
+    "coords": [
+   "4,53.53,359.29,240.52,7.94",
+   "4,53.80,370.25,240.48,7.94",
+   "4,53.80,381.21,58.62,7.94"
+    ],
+    "tag": "Method",
+    "content": "To evaluate BanglAssist's performance before deploying it, we used a dataset composed of prior customer service data provided by MultilingualCo."
+  },
+  {
+    "coords": [
+  "4,53.53,359.29,240.52,7.94",
+  "4,53.80,370.25,240.48,7.94",
+  "4,53.80,381.21,58.62,7.94"
+    ],
+    "tag": "Method",
+    "content": "For this preliminary evaluation, we selected 20 queries, of which six were written in Bengali using Bengali script, nine in Bengali using English script (representing the Banglish scenario), and five predominantly in English (representing the SAsE scenario)."
+  },
+  {
+    "coords": [
+  "4,53.80,471.35,241.76,7.94",
+  "4,53.80,482.31,240.25,7.94",
+  "4,53.80,493.27,240.25,7.94",
+  "4,53.80,504.23,23.28,7.94"
+    ],
+    "tag": "Method",
+    "content": "First, we quantitatively evaluated the retrieval of context by measuring the context's cosine similarity to the query, followed by the reranking of the retrieved context based on its relevance to the query."
+  },
+  {
+    "coords": [
+  "4,377.02,559.03,181.19,7.94",
+  "4,317.96,569.99,176.26,7.94",
+  "4,496.72,569.99,61.49,7.94",
+  "4,317.96,580.94,240.48,7.94",
+  "4,317.96,591.90,124.56,7.94",
+  "4,444.77,591.90,18.99,7.94"
+    ],
+    "tag": "Method",
+    "content": "We first assessed whether the answers matched the language and script of the questions (Lang.match) and then how many answers were retrieved based on the initial FAQ check rather than being generated (Gen.rate)."
+  },
+  {
+    "coords": [
+ "5,471.64,375.46,88.08,7.94",
+ "5,317.96,386.42,241.23,7.94",
+ "5,317.62,397.38,130.88,7.94"
+    ],
+    "tag": "Method",
+    "content": "This was observed especially in answers for which the context contained these instructions, which likely overwrote the prompt."
+  },
+  {
+    "coords": [
+ "5,317.96,487.05,240.25,7.94",
+ "5,317.96,498.01,240.25,7.94",
+ "5,317.96,508.96,174.87,7.94"
+    ],
+    "tag": "Result",
+    "content": "Our analyses highlight the potential of BanglAssist in dealing with complex customer service queries, as well as its limitations that provide opportunities for further improvements."
+  },
+  {
+    "coords": [
+"5,386.64,585.68,171.56,7.94",
+"5,317.96,596.64,240.25,7.94",
+"5,317.96,607.59,230.08,7.94"
+    ],
+    "tag": "Result",
+    "content": "We also conclude from our qualitative analysis that said context should only focus on the information quality and not the delivery, as it might interfere with BanglAssist's prompt."
+  },
+  {
+    "coords": [
+"5,550.10,607.59,9.61,7.94",
+"5,317.96,618.55,240.25,7.94",
+"5,317.96,629.51,161.47,7.94",
+"5,481.66,629.51,76.55,7.94",
+"5,317.96,640.47,240.25,7.94",
+"5,317.96,651.43,83.18,7.94"
+    ],
+    "tag": "Method",
+    "content": "Finally, we are aware of the limitation of our evaluation method given the volume and variety of processed queries. We therefore plan on deploying a refined version of BanglAssist to test its performance in a real-world setting."
+  },
+  {
+    "coords": [
+"6,53.80,101.49,240.25,7.94",
+"6,53.80,112.45,241.76,7.94",
+"6,53.80,123.41,240.25,7.94",
+"6,53.80,134.37,185.26,7.94"
+    ],
+    "tag": "Goal",
+    "content": "In this paper, we have explored the development and evaluation of a multilingual chatbot, BanglAssist, designed to address complex linguistic challenges such as CSW and dialectal variations in Bengali-English customer service interactions."
+  },
+  {
+    "coords": [
+"6,241.93,134.37,52.12,7.94",
+"6,53.80,145.33,241.76,7.94",
+"6,53.80,156.29,240.25,7.94",
+"6,53.80,167.25,240.24,7.94",
+"6,53.80,178.20,241.63,7.94"
+    ],
+    "tag": "Method",
+    "content": "By leveraging a retrieval pipeline that aligns generated responses with contextual information from a curated FAQ database (RAG) and targeted prompt engineering, we demonstrated the chatbot's capability to provide contextually accurate and linguistically adaptive responses."
+  },
+  {
+    "coords": [
+"6,53.80,309.71,240.25,7.94",
+"6,53.80,320.67,240.25,7.94",
+"6,53.80,331.63,240.25,7.94",
+"6,53.80,342.59,100.88,7.94"
+    ],
+    "tag": "Goal",
+    "content": "Future work could extend these findings by exploring additional linguistic contexts and further refining retrieval and generation mechanisms to enhance performance across a broader spectrum of languages and applications."
+  }
+
+
+ 
+]

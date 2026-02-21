@@ -1,0 +1,11 @@
+{
+  "manifest_version": 3,
+  "version": "1.0.0",
+  "name": "My Vite Extension1",
+  "side_panel": {
+    "default_path": "index.html"
+  },
+  "permissions": ["scripting", "sidePanel"],
+
+  "host_permissions": ["http://*/*", "https://*/*"]
+}

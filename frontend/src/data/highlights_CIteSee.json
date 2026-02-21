@@ -1,0 +1,126 @@
+[
+  {
+    "coords": [
+      "1,327.92,640.40,231.80,7.94",
+      "1,317.96,651.29,240.41,8.02",
+      "1,317.96,662.31,241.76,7.94",
+      "1,317.96,673.27,38.95,7.94"
+    ],
+    "tag": "Goal",
+    "content": "To overcome hallucination and linguistic challenges, we developed and evaluated BanglAssist: a multilingual GenAI customer service agent designed to enhance user experience in Banglish interactions."
+  },
+  
+  {
+    "coords": [
+      "1,53.53,325.17,240.51,7.94",
+      "1,53.80,336.12,241.76,7.94",
+      "1,53.80,347.08,220.82,7.94"
+    ],
+    "tag": "Objective",
+    "content": "This paper introduces CiteSee, a paper reading tool that leverages a user's publishing, reading, and saving activities to provide personalized visual augmentations and context around citations."
+  },
+  {
+    "coords": [
+      "1,243.69,390.92,50.36,7.94",
+      "1,53.80,401.88,240.42,7.94",
+      "1,53.80,412.84,141.14,7.94"
+    ],
+    "tag": "Result",
+    "content": "We conducted a lab study that suggests CiteSee is significantly more effective for paper discovery than three baselines."
+  },
+  {
+    "coords": [
+      "1,197.89,412.84,96.39,7.94",
+      "1,53.80,423.80,240.24,7.94",
+      "1,53.80,434.75,241.76,7.94",
+      "1,53.80,445.71,240.25,7.94",
+      "1,53.80,456.67,30.21,7.94"
+    ],
+    "tag": "Result",
+    "content": "A field deployment study shows CiteSee helps participants keep track of their explorations and leads to better situational awareness and increased paper discovery via inline citation when conducting real-world literature reviews."
+  },
+  {
+    "coords": ["14,53.80,526.15,240.25,7.94", "14,53.80,537.11,221.83,7.94"],
+    "tag": "Novelty",
+    "content": "In this paper, we introduce CiteSee, a novel scientific paper reading tool that provides a personalized literature review experience."
+  },
+  {
+    "coords": [
+      "14,277.83,537.11,17.73,7.94",
+      "14,53.80,548.07,240.25,7.94",
+      "14,53.80,559.03,240.24,7.94",
+      "14,53.80,569.99,240.25,7.94",
+      "14,53.80,580.94,30.21,7.94"
+    ],
+    "tag": "Objective",
+    "content": "CiteSee leverages a user's prior research activities to augment inline citations in the current paper, which helps the user contextualize the current paper and explore prior work relevant to their literature reviews."
+  },
+  {
+    "coords": [
+      "14,106.22,624.78,187.82,7.94",
+      "14,53.80,635.74,240.25,7.94",
+      "14,53.80,646.70,240.25,7.94",
+      "14,53.80,657.66,69.86,7.94"
+    ],
+    "tag": "Result",
+    "content": "Through a lab study, we found our strategy of using reading history to augment inline citations to be significantly more effective in helping users discover prior work compared to three baseline strategies."
+  },
+  {
+    "coords": [
+      "9,448.55,537.11,109.65,7.94",
+      "9,317.96,548.07,240.25,7.94",
+      "9,317.96,559.03,240.48,7.94",
+      "9,317.96,569.99,105.25,7.94"
+    ],
+    "tag": "Method",
+    "content": "This design was a compromise to control for the length and cognitive demand of the study, and it allowed us to compare multiple discovery highlighting strategy based on human judgements."
+  },
+  {
+    "coords": [
+      "9,425.44,569.99,132.76,7.94",
+      "9,317.96,580.94,240.25,7.94",
+      "9,317.96,591.90,165.53,7.94"
+    ],
+    "tag": "Method",
+    "content": "While we only tested citations in the Introduction and Related Work sections, we believe citations are typically most concentrated in these sections."
+  },
+  {
+    "coords": [
+      "14,125.90,657.66,169.14,7.94",
+      "14,53.80,668.62,240.25,7.94",
+      "14,53.80,679.57,240.48,7.94",
+      "14,53.80,690.53,240.24,7.94",
+      "14,53.47,701.49,109.04,7.94"
+    ],
+    "tag": "Result",
+    "content": "Through a week-long field deployment study, participants conducting real-world literature reviews valued the additional personalized context around inline citations provided by CiteSee, which allowed them to have better situational awareness when exploring many papers."
+  },
+  {
+    "coords": [
+      "3,173.40,142.59,120.64,7.94",
+      "3,53.80,153.55,241.76,7.94",
+      "3,53.80,164.44,240.24,8.02",
+      "3,53.80,175.40,240.25,8.02",
+      "3,53.80,186.42,240.24,7.94"
+    ],
+    "tag": "Method",
+    "content": "The primary design challenge we addressed was to develop in-situ indicators that were simultaneously deeply informative about the contexts where a citation has been encountered before, while also being subtle, integrating into a paper reading experience without distracting or overwhelming the reader."
+  },
+  {
+    "coords": ["3,64.71,211.94,203.72,7.95"],
+    "tag": "Objective",
+    "content": "(1) A prototype scientific paper reading tool, CiteSee."
+  },
+  {
+    "coords": [
+      "3,64.70,398.25,229.34,7.95",
+      "3,78.21,409.21,215.84,7.94",
+      "3,78.21,420.17,215.84,7.94",
+      "3,77.88,431.13,216.17,7.94",
+      "3,77.98,442.08,216.07,7.94",
+      "3,78.21,453.04,140.53,7.94"
+    ],
+    "tag": "Method",
+    "content": "(4) A field deployment study (N=6) with real-world literature review tasks which offers qualitative insights of how CiteSee helped participants prioritize and keep track of explorations with results suggest a 2.7x increase in paper discovery rate via inline citations compared to previously reported numbers that were based on self-reporting."
+  }
+]
