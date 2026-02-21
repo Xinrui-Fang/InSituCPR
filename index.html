@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="LLM-based In-situ Thought Exchanges for Critical Paper Reading
+">
+  <meta name="keywords" content="Nerfies, D-NeRF, NeRF">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LLM-based In-situ Thought Exchanges for Critical Paper Reading  </title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/iui26_icon.png">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<!-- <nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://keunhong.com">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://hypernerf.github.io">
+            HyperNeRF
+          </a>
+          <a class="navbar-item" href="https://nerfies.github.io">
+            Nerfies
+          </a>
+          <a class="navbar-item" href="https://latentfusion.github.io">
+            LatentFusion
+          </a>
+          <a class="navbar-item" href="https://photoshape.github.io">
+            PhotoShape
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</nav> -->
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">LLM-based In-situ Thought Exchanges for Critical Paper Reading
+</h1>
+        <div class="icon-container">
+          <img src="./static/images/iui26_icon.png" alt="icon image" class="page-icon">
+        </div>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://xinrui.design/">Xinrui Fang</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="https://anranxu.com/">Anran Xu</a><sup>1,2</sup>,</span>
+            <span class="author-block">
+              <a href="https://www.chilanyang.space/">Chi-Lan Yang</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://s103065533.wixsite.com/yafanglin">Ya-Fang Lin</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://www.malacria.com/">Sylvain Malacria</a><sup>1,3</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://iis-lab.org/member/koji-yatani/">Koji Yatani</a><sup>1</sup>,
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>The University of Tokyo,</span>
+            <span class="author-block"><sup>2</sup>RIKEN Center for Advanced Intelligence Project, RIKEN</span>
+            <span class="author-block"><sup>3</sup>Univ. Lille, Inria, CNRS, Centrale Lille, UMR 9189 CRIStAL Lille</span>
+
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://arxiv.org/pdf/2510.15234"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2510.15234"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Video Link. -->
+              <!-- <span class="link-block">
+                <a href="https://www.youtube.com/watch?v=MrKrnHhk8IA"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span> -->
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              <!-- Dataset Link. -->
+              <!-- <span class="link-block">
+                <a href="https://github.com/google/nerfies/releases/tag/0.1"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="far fa-images"></i>
+                  </span>
+                  <span>Data</span>
+                  </a> -->
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Teaser -->
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <!-- <video id="teaser" autoplay muted loop playsinline height="100%">
+        <source src="./static/images/teaser_IUI26.png"
+                type="video/mp4">
+      </video> -->
+      <img src="./static/images/teaser_IUI26.png" alt="Teaser image">
+      <h2 class="subtitle has-text-centered">
+        The user interface consists of a custom PDF viewer, a left Comment Pane, and a right Section Pane. Users can highlight
+sentences, leave comments, generate critical thinking questions, and engage in multi-turn thought exchanges with AI agents.
+      </h2>
+    </div>
+  </div>
+</section>
+
+
+<!-- <section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item item-steve">
+          <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/steve.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-chair-tp">
+          <video poster="" id="chair-tp" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/chair-tp.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-shiba">
+          <video poster="" id="shiba" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/shiba.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-fullbody">
+          <video poster="" id="fullbody" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/fullbody.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-blueshirt">
+          <video poster="" id="blueshirt" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/blueshirt.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-mask">
+          <video poster="" id="mask" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/mask.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-coffee">
+          <video poster="" id="coffee" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/coffee.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-toby">
+          <video poster="" id="toby" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/toby2.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+<!-- Abstract -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Critical reading is a primary way through which researchers develop 
+            their critical thinking skills. 
+            
+            While exchanging thoughts and opinions with peers can strengthen critical reading, 
+            junior researchers often lack access to peers who can offer diverse perspectives. 
+
+          </p>
+          <p>
+            To address this gap, 
+            we designed an in-situ thought exchange interface informed by peer feedback 
+            from a formative study (N=8) to support junior researchers' critical paper reading. 
+            We evaluated the effects of thought exchanges under three conditions 
+            (no-agent, single-agent, and multi-agent) with 46 junior researchers over two weeks. 
+            
+
+          </p>
+          <p>
+            Our results showed that incorporating agent-mediated thought exchanges during 
+            paper reading significantly improved participants' critical thinking scores 
+            compared to the no-agent condition. 
+
+            In the single-agent condition, 
+            participants more frequently made reflective annotations on the paper content. 
+            In the multi-agent condition, participants engaged more actively with agents' responses. 
+            Our qualitative analysis further revealed that participants compared and 
+            analyzed multiple perspectives in the multi-agent condition. 
+            
+          </p>
+          <p>
+            This work contributes to understanding in-situ AI-based support for critical paper reading 
+            through thought exchanges and offers design implications for future research.
+
+          </p>
+          <!-- <p>
+            We show that <span class="dnerf">Nerfies</span> can turn casually captured selfie
+            photos/videos into deformable NeRF
+            models that allow for photorealistic renderings of the subject from arbitrary
+            viewpoints, which we dub <i>"nerfies"</i>. We evaluate our method by collecting data
+            using a
+            rig with two mobile phones that take time-synchronized photos, yielding train/validation
+            images of the same pose at different viewpoints. We show that our method faithfully
+            reconstructs non-rigidly deforming scenes and reproduces unseen views with high
+            fidelity.
+          </p> -->
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+    <!-- Paper video. -->
+    <!-- <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Video</h2>
+        <div class="publication-video">
+          <iframe src="https://www.youtube.com/embed/MrKrnHhk8IA?rel=0&amp;showinfo=0"
+                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div> -->
+    <!--/ Paper video. -->
+  </div>
+</section>
+
+<!-- Conditions -->
+<section class="section">
+  <div class="container is-max-desktop">
+     
+    <div class="columns is-centered">
+      <div class="column is-narrow has-text-centered">
+        <h2 class="title is-3">Study Condtions</h2>
+      </div>
+    </div>
+ 
+    <div class="columns is-centered">
+      
+
+      <!-- Multiple-agent Condition. -->
+      <div class="column">
+        <div class="content ">
+          <h2 class="title is-4 ">Multiple Agent</h2>
+          <p>
+            Participants exchanged thoughts with multiple AI agents representing 
+            different research domains, enabling interdisciplinary perspectives.            </p>
+
+          </p>
+          <img src="./static/images/multi_agents.png" alt="multi-agents">
+          <!-- <video id="dollyzoom" autoplay controls muted loop playsinline height="100%"> -->
+            
+          </video>
+        </div>
+      </div>
+      <!--/ Multiple-agent Condition. -->
+
+      <!-- Single-agent Condition. -->
+      <div class="column">
+        <div class="content">
+          <h2 class="title is-4">Single Agent</h2>
+          <p>
+            In this condition, participants exchanged thoughts 
+            with a single AI agent from a specific research domain in a  one-on-one setup.
+          </p>
+          <img src="./static/images/single_agent.png" alt="single-agent">
+        </div>
+      </div>
+      <!--/ Single-agent Condition. -->
+
+      <!-- No Agent Condition. -->
+      <div class="column">
+        <h2 class="title is-4">No Agent</h2>
+        <div class="columns is-centered">
+          <div class="column content">
+            <p>
+             
+              Participants receive only a static text-based reminder based on the QRAC approach, 
+              encouraging self-revision without interactive feedback features.
+            </p>
+            <img src="./static/images/no_agent.png" alt="no-agent">
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <!--/ No Agent Condition. -->
+  </div>
+</section>
+
+<!-- Procedure -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column">
+        <h2 class="title is-3">Study Procedure</h2>
+        <img src="./static/images/user_study_flow.png" alt="user_study_flow">
+
+        <div class="content has-text-justified">
+          <p>
+            We recruited 46 junior reserchers and assigned them into three
+            conditions.
+            The user study consisted of three phases: a
+            1.5-hour pre-training test (Day 1), a two-week critical reading training period (Day 2–15), and a 1.5-hour post-training test (Day 16).
+            The pre- and post-training tests were conducted within three days before and after the training period, respectively. To mitigate order
+            effects, papers 1 and 8 were counterbalanced so that half of the
+            participants received them in reverse order.
+            
+
+          </p>
+         
+         
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="hero  is-small">
+  <div class="hero-body ">
+     <div class="column is-centered has-text-centered">
+      <h2 class="title is-3">Results</h2>
+     
+    <div class="container is-max-desktop">
+      <div id="results-carousel" class="carousel results-carousel">
+        
+        <div class="item-2">
+          <img src="./static/images/external_review.png" alt="Teaser image">
+           <h2 class="subtitle has-text-centered is-6">
+        A quantitative comparison of external review scores using the Critical Thinking Value Rubric.
+  Scores for five dimensions and an overall average are shown across three participant groups, with measurements taken before and after the training. The results indicate two-week training under the multi and single condition effectively enhanced critical thinking ability, together with no significant change in the none condition.
+          </h2>
+        </div>
+        <div class="item-2">
+          <img src="./static/images/view_points.png" alt="Teaser image">
+           <h2 class="subtitle has-text-centered is-6">
+        A quantitative comparison of the average number of clusters across participant groups.
+  Values are shown for two time points, Initial and Revised, with statistical significance marked using asterisks. The results indicate that participants in single and multi condition generated more unique viewpoints than those in none condition, while there was no significant difference between single and multi condition.
+          </h2>
+        </div>
+        <div class="item-2">
+          <img src="./static/images/self_assessment.png" alt="Teaser image">
+           <h2 class="subtitle has-text-centered is-6">
+        A quantitative comparison of participants' self-assessed critical thinking scores.
+  Results are presented across different conditions, with statistical significance marked by asterisks. Overall, Participants in both the single and multi condition reported higher self-perceived critical thinking ability than those in the none condition, with significant improvements observed across total scores as well as the Interpretation, Analysis, and Inference dimensions.
+          </h2>
+        </div>
+        <div class="item-2">
+          <img src="./static/images/nasa_tlx.png" alt="Teaser image">
+           <h2 class="subtitle has-text-centered is-6">
+        Participants’ perceived workload was assessed using the NASATLX. The table presents the mean and standard deviation for each
+workload metric across the three conditions (none, single, multi),
+along with the results of the Kruskal–Wallis tests. We did not find
+any significant difference across the interface conditions for any of
+the NASA-TLX dimensions.
+          </h2>
+        </div>
+        <div class="item-2">
+          <img src="./static/images/interaction_log.png" alt="Teaser image">
+           <h2 class="subtitle has-text-centered is-6">
+        A scatter plot visualizing participants' interaction behaviors.
+  Each point represents one participant.
+  The horizontal axis shows the average number of annotation uses, and the vertical axis shows the average number of reaction uses.
+  Participants from different experimental conditions are distinguished using different markers or colors.
+          </h2>
+        </div>
+       
+       
+       
+      </div>
+    </div>
+    </div>
+  </div>
+</section>
+
+<!-- Main Findings -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column ">
+        <h2 class="title is-3">Main Findings</h2>
+        <div class="content has-text-justified">
+          <p>
+            Our mixed-methods user study demonstrated that (1)
+            incorporating agent-mediated thought exchanges during academic
+            paper reading fostered junior researchers’ critical thinking skills;     
+            and (2) the number of agents involved influenced readers’ critical
+            reading practices in distinct ways.
+            Specifically, participants interacting with a single agent tended to annotate directly in the text
+            after viewing the AI agent’s response as a way to reflect on their
+            thoughts; in contrast, those engaging with multiple agents primarily focused on comparing and analyzing the different perspectives
+            expressed by the AI agents, while paying less attention to annotating directly on the text. 
+            Our contribution lies in designing LLMs
+            that encourage users to invest more cognitive effort into reading
+            instead of offloading it.
+          </p>
+
+          
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+    <!-- Paper video. -->
+    <!-- <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Video</h2>
+        <div class="publication-video">
+          <iframe src="https://www.youtube.com/embed/MrKrnHhk8IA?rel=0&amp;showinfo=0"
+                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div> -->
+    <!--/ Paper video. -->
+  </div>
+</section>
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@inproceedings{Fang2026InSituThoughtExchanges,
+  author    = {Fang, Xinrui and Xu, Anran and Yang, Chi-Lan and Lin, Ya-Fang and Malacria, Sylvain and Yatani, Koji},
+  title     = {LLM-based In-situ Thought Exchanges for Critical Paper Reading},
+  booktitle = {Proceedings of the 31st International Conference on Intelligent User Interfaces},
+  series    = {IUI '26},
+  year      = {2026},
+  pages     = {1--22},
+  address   = {New York, NY, USA},
+  publisher = {ACM},
+  doi       = {10.1145/3742413.3789069},
+  url       = {https://doi.org/10.1145/3742413.3789069}
+}
+</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          
+          <p>
+            The design of this website is inspired by <a href="https://github.com/nerfies/nerfies.github.io" target="_blank" rel="noopener noreferrer">
+  this project
+</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
