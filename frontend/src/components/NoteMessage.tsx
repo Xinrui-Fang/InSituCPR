@@ -87,7 +87,6 @@ const NoteMessage: React.FC<NoteMessageProps> = ({
 
   const handleThumbUpClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
-    console.log(isGeneratingRef);
 
     setIsThumbUp((prevThumbUp) => {
       const newThumbUp = !prevThumbUp;
@@ -101,7 +100,6 @@ const NoteMessage: React.FC<NoteMessageProps> = ({
           n.id === note.id ? { ...n, thumbUpStatus: newThumbUp } : n,
         ),
       );
-      console.log(note);
 
       return newThumbUp;
     });
@@ -122,7 +120,6 @@ const NoteMessage: React.FC<NoteMessageProps> = ({
           n.id === note.id ? { ...n, thumbDownStatus: newThumbDown } : n,
         ),
       );
-      console.log(note);
 
       return newThumbDown;
     });
@@ -134,7 +131,6 @@ const NoteMessage: React.FC<NoteMessageProps> = ({
   ) => {
     setAnchorEl(event.currentTarget);
     let searchQuery = note.content;
-    console.log(note);
     searchQuery = searchQuery.replace(/\[\d+\]/g, "").trim();
 
     if (searchQuery.startsWith('"') && searchQuery.endsWith('"')) {
@@ -159,7 +155,6 @@ const NoteMessage: React.FC<NoteMessageProps> = ({
         throw new Error(`Error: ${response.status}`);
       }
       const data = await response.json();
-      console.log(data);
 
       if (data) {
         const papers = data.map((item) => ({
@@ -195,7 +190,6 @@ const NoteMessage: React.FC<NoteMessageProps> = ({
       const data = await callGenerativePerspQuestionAPI(note.quote);
       // setResponseData(data);
       setQuote(data);
-      console.log(data);
     } catch (error) {
       console.log("Failed to fetch response.");
     }
@@ -380,7 +374,6 @@ const NoteMessage: React.FC<NoteMessageProps> = ({
                 background: getBackgroundColor(note.label),
               }}
               onClick={() => {
-                console.log(isGeneratingRef);
                 onHighlightLabelBtnClick(note);
               }}
             >
@@ -538,7 +531,6 @@ const NoteMessage: React.FC<NoteMessageProps> = ({
                       : note,
                   ),
                 );
-                console.log(note);
               }}
             />
           )}
@@ -581,7 +573,6 @@ const NoteMessage: React.FC<NoteMessageProps> = ({
                 onClick={(event) => {
                   event.stopPropagation();
                   // Handle reference functionality here
-                  console.log("Reference note", note.id);
 
                   fetchReference(event, note);
                 }}

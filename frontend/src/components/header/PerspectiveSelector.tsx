@@ -11,7 +11,6 @@ export default function PerspectiveSelector({
   avatars,
   setAvatars,
 }: PerspectiveSelectorProps): JSX.Element {
-  console.log(avatars);
   return (
     <>
       <div

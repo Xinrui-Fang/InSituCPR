@@ -28,7 +28,6 @@ const callGenerativeHighlightReinterpretAPI = async (
     }
 
     const result = await response.json();
-    console.log("API2 Response:", result);
     return result.data;
   } catch (error) {
     console.error("Error calling the API:", error);

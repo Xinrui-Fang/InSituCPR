@@ -41,7 +41,6 @@ function useNoteCreator({ notes, setNotes }: UseNoteCreatorProps) {
       avatars?: [string, string, string][],
     ) => {
       setSelectedNoteId(id);
-      console.log("avatars: " + avatars);
 
       let noteId = notes.length;
       const note = notes.find((node) => node.id === id);
@@ -50,7 +49,6 @@ function useNoteCreator({ notes, setNotes }: UseNoteCreatorProps) {
         console.error("Note not found");
         return;
       }
-      console.log(note.noteType);
       let messageText = "";
       // Question Note
       if (note.noteType === 3) {
@@ -87,8 +85,7 @@ function useNoteCreator({ notes, setNotes }: UseNoteCreatorProps) {
         .replace(/\s*```$/, "");
 
       const jsonData = JSON.parse(cleanedData);
-      console.log(jsonData);
-      console.log(avatars);
+ 
 
       const newNotes: Note[] = Object.entries(jsonData).map(
         ([key, value], index) => ({

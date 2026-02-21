@@ -120,7 +120,6 @@ const PDFViewer: React.FC<PDFViewrProps> = ({
   // Click handleStarBtn to Request the Server
   const handleStarClick = async (note) => {
     try {
-      console.log(note.content);
       const data = await callGenerativePerspectiveAPI(note.content);
       setResponseData(data);
     } catch (error) {
@@ -162,7 +161,6 @@ const PDFViewer: React.FC<PDFViewrProps> = ({
         // ✅ 上传新添加的 note 到 Firestore
         const lastNote = updatedNotes[updatedNotes.length - 1];
       }
-      console.log(props.selectedText);
     };
 
     // ---------------------------------------------
@@ -307,7 +305,6 @@ const PDFViewer: React.FC<PDFViewrProps> = ({
   React.useEffect(() => {
     const handleShowHighlightsFromPage1And2 = async () => {
       const allHighlightAreas: HighlightArea[] = [];
-      console.log(noteId);
 
       const keyword = notes
         .find((note) => note.id === noteId)
@@ -323,7 +320,7 @@ const PDFViewer: React.FC<PDFViewrProps> = ({
         index !== -1 && index + 1 < sectionData.length
           ? sectionData[index + 1]
           : null;
-      console.log(currentSection);
+
       const currentSectionInfos = currentSection.split(",");
       const currentSectionPageIndex = Number(currentSectionInfos[0]);
       const currentSectionYaxis = parseFloat(currentSectionInfos[2]);
@@ -354,7 +351,7 @@ const PDFViewer: React.FC<PDFViewrProps> = ({
               pageIndex < nextSectionPageIndex);
 
           const coordXaxis = parseFloat(coordParameter[1]);
-          console.log("coordXaxis" + coordXaxis);
+
           const isInLeftColumn = coordXaxis < 300;
           const isInRightColumn = coordXaxis >= 300;
 
@@ -370,7 +367,7 @@ const PDFViewer: React.FC<PDFViewrProps> = ({
               pdfDocument,
             );
             currentHighlightAreas.push(...areas);
-            console.log("areas" + areas);
+
             allHighlightAreas.push(...areas);
             const noteIdLength = notes.length;
           }
@@ -397,7 +394,7 @@ const PDFViewer: React.FC<PDFViewrProps> = ({
 
       setTempHighlight(allHighlightAreas);
     };
-    console.log(reviewLabel);
+
     handleShowHighlightsFromPage1And2();
   }, [reviewLabel, pdfDocument]);
 
@@ -424,7 +421,6 @@ const PDFViewer: React.FC<PDFViewrProps> = ({
           fileUrl={fileUrl}
           plugins={[highlightPluginInstance]} //defaultLayoutPluginInstance
           onDocumentLoad={(e) => {
-            console.log("PDF Document Loaded");
             setPdfDocument(e.doc);
           }}
           // Capture page change events

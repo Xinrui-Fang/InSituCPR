@@ -2,7 +2,6 @@ import callGenerativeHighlightReinterpretAPI from "../api/GenerativeHighlightRei
 import { processNewCommentQuestionNote } from "../utils/NoteUtils";
 
 const handleHighlightLabelBtnClick = async (note: Note, setNotes: any) => {
-  console.log(note);
   try {
     const request =
       "The reader highlight the sentence: " +
@@ -15,7 +14,6 @@ const handleHighlightLabelBtnClick = async (note: Note, setNotes: any) => {
     );
     const updatedNotes = processNewCommentQuestionNote(notes, note.id, data);
     setNotes(updatedNotes);
-    console.log(data);
   } catch (error) {
     console.log("catch API error");
   }

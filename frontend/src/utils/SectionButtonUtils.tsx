@@ -41,7 +41,7 @@ export const SectionButtonUtils: React.FC<{
   React.useEffect(() => {
     const fetchData = async () => {
       const data = await loadSectionData(selectedPaper);
-      console.log(selectedPaper);
+ 
       setSectionData(data);
     };
     fetchData();
@@ -67,10 +67,7 @@ export const SectionButtonUtils: React.FC<{
     setGeneratingLabel(label);
     try {
       const data = await callGenerativeQuestionAPI(label);
-      // const data =
-      //   "What are the implications of the findings discussed in the introduction for advancing future research methodologies?";
-      // // setResponseData(data);
-      // console.log(data);
+
       const newNote = processNewQANote(
         notes,
         ++noteId,

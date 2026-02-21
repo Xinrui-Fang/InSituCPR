@@ -91,13 +91,10 @@ export default function NoteViewer({
 
     const latestCreatedParentNode = notes[notes.length - 1];
     if (latestCreatedParentNode.id === latestCreatedParentNode.sub_id) {
-      console.log(
-        "Detected new note with id = sub_id:",
-        latestCreatedParentNode.id,
-      );
+    
       toggleSubIdVisibility(latestCreatedParentNode.id);
       if (latestCreatedParentNode.noteType === 6) {
-        console.log("User highlights");
+    
       }
     }
   }, [notes]);
@@ -142,7 +139,7 @@ export default function NoteViewer({
   };
 
   const handleHighlightClick = (note) => {
-    console.log(isGeneratingRef);
+   
     handleHighlightLabelBtnClick(
       note,
       notes,
@@ -164,8 +161,7 @@ export default function NoteViewer({
     if (text.trim()) {
       const updatedNotes = processNewDiscussionNote(notes, parentNoteId, text);
       setNotes(updatedNotes);
-      console.log(updatedNotes);
-
+    
       setDiscussionTexts((prev) => ({
         ...prev,
         [parentNoteId!]: "",
@@ -178,7 +174,7 @@ export default function NoteViewer({
           (note) => note.id === parentNoteId && note.interactionStatus === 0,
         )
       ) {
-        console.log(isGeneratingRef);
+       
         if (isGeneratingRef.current) return;
 
         isGeneratingRef.current = true;
@@ -192,8 +188,7 @@ export default function NoteViewer({
           ),
         );
 
-        console.log(notes);
-
+       
         // finsih loading status
         setLoadingNoteIds((prev) => {
           const { [parentNoteId!]: _, ...rest } = prev;
@@ -222,8 +217,7 @@ export default function NoteViewer({
             note.thumbDownStatus != true,
         );
         const agreeText = agreeNotes.map((note) => note.content).join("\n");
-        console.log(agreeText);
-
+      
         try {
           // Loading status
           setLoadingNoteIds((prev) => ({ ...prev, [parentNoteId!]: true }));
@@ -239,7 +233,7 @@ export default function NoteViewer({
             parentNoteId,
             response,
           );
-          console.log(updatedFeedbackNotes);
+        
           setNotes((prevNotes) => [...prevNotes, updatedFeedbackNotes]);
 
           setNotes((prevNotes) =>
@@ -328,7 +322,7 @@ export default function NoteViewer({
       });
 
       setNotes(finalUpdatedNotes);
-      console.log(data);
+     
     } catch (error) {
       console.log("Failed to fetch response.");
     }
@@ -442,7 +436,7 @@ export default function NoteViewer({
                   onClick={(event) => {
                     event.stopPropagation();
                     toggleSubIdVisibility(note.id);
-                    console.log(note);
+              
                   }}
                   size="small"
                 >
@@ -534,7 +528,7 @@ export default function NoteViewer({
                                     // TODO: Add your handler logic here
                                     setReviewLabel(note.label);
                                     setNoteId(note.id);
-                                    console.log(reviewLabel);
+                          
                                   }}
                                 >
                                   review this section

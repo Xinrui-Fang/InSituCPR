@@ -27,7 +27,6 @@ const useAppState = () => {
 
   // Side effects
   useEffect(() => {
-    console.log(notes);
   }, [selectedNoteId]);
 
   return {

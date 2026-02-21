@@ -32,7 +32,6 @@ const callGenerativeImproveAnswerAPI = async (
     }
 
     const result = await response.json();
-    console.log("API Response:", result);
     const cleanedResult = result.data.replace(/\[\d+\]/g, "");
     return cleanedResult;
   } catch (error) {

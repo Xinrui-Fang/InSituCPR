@@ -109,7 +109,6 @@ const RenderHighlightTarget: React.FC<RenderHighlightTargetPropsExtended> = ({
     setNotes(updatedNoets); // Update Note List
     const newNote = updatedNoets[updatedNoets.length - 1];
 
-    console.log(updatedNoets);
     setTempHighlight([]);
     cancel();
   };

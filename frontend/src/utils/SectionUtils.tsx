@@ -30,7 +30,7 @@ export const extractSections = async (
       }
     });
   }
-  console.log(sections);
+ 
   return sections;
 };
 

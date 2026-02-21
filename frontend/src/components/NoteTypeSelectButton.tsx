@@ -15,7 +15,6 @@ export const NoteTypeSelectButton: React.FC<SelectButtonProps> = ({
 }) => {
   const handleChange = (event: SelectChangeEvent) => {
     setNoteSelectType(event.target.value as string);
-    console.log(event.target.value);
   };
 
   return (

@@ -35,8 +35,6 @@ function App() {
     apiKey: string;
   }>();
 
-  console.log(participantId);
-  console.log(selectedPaper);
   const isGeneratingRef = React.useRef(false);
 
   const [noteId, setNoteId] = React.useState<number | null>(null); // Type of the state is string
@@ -52,7 +50,6 @@ function App() {
   );
 
   const scrollToNote = (noteId: number) => {
-    console.log("click highlight");
     if (noteViewerRef.current) {
       noteViewerRef.current.scrollToNote(noteId);
     }
@@ -61,7 +58,6 @@ function App() {
   // Set vector-store
   React.useEffect(() => {
     const storedKey = localStorage.getItem("openai_api_key");
-    console.log(storedKey);
     //   call /api/set-vector-store when mount papge (Refresh)
     const setVectorStore = async () => {
       try {

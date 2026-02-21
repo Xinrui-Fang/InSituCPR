@@ -26,9 +26,7 @@ async function extractPdfText(
 
     // Write the extracted text to a .txt file
     fs.writeFileSync(outputTxtPath, allText, "utf8");
-    console.log(
-      `Text content has been extracted and saved to: ${outputTxtPath}`
-    );
+
   } catch (error) {
     console.error("Error extracting PDF text:", error);
   }

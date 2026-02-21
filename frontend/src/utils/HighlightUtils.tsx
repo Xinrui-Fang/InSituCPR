@@ -38,7 +38,7 @@ export const getHighlightAreasForText = async (
     top,
     width,
   });
-  console.log(y, top);
+
   return areas;
 };
 
@@ -118,7 +118,7 @@ export const handleHighlightLabelBtnClick = async (
   isGeneratingRef: any,
 ) => {
   if (loadingNoteIds[note.id]) return;
-  console.log(isGeneratingRef);
+
   if (isGeneratingRef.current) return;
 
   isGeneratingRef.current = true;
@@ -141,14 +141,14 @@ export const handleHighlightLabelBtnClick = async (
       );
     }
 
-    console.log(result);
+
 
     const cleanedData = result
       .replace(/^```json\s*/, "")
       .replace(/\s*```$/, "");
-    console.log(cleanedData);
+
     const jsonData = JSON.parse(cleanedData);
-    console.log(jsonData);
+
 
     let noteId = notes.length;
     const newNotes: Note[] = Object.entries(jsonData).map(
@@ -165,7 +165,7 @@ export const handleHighlightLabelBtnClick = async (
         noteType: 4, // Check answers type
       }),
     );
-    console.log(newNotes);
+
 
     setNotes((prevNotes) => [...prevNotes, ...newNotes]);
 
