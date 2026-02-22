@@ -24,4 +24,4 @@ cd backend
 python install -r requirements.txt
 python server.py
 ```
-For reference feature, enter your semantic scholar API into /backend/.env
+For reference feature, enter your semantic scholar API key into /backend/.env
