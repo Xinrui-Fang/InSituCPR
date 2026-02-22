@@ -35,3 +35,19 @@ python install -r requirements.txt
 python server.py
 ```
 For reference feature, enter your semantic scholar API key into /backend/.env
+
+### Citations
+```
+@inproceedings{Fang2026InSituThoughtExchanges,
+  author    = {Fang, Xinrui and Xu, Anran and Yang, Chi-Lan and Lin, Ya-Fang and Malacria, Sylvain and Yatani, Koji},
+  title     = {LLM-based In-situ Thought Exchanges for Critical Paper Reading},
+  booktitle = {Proceedings of the 31st International Conference on Intelligent User Interfaces},
+  series    = {IUI '26},
+  year      = {2026},
+  pages     = {1--22},
+  address   = {New York, NY, USA},
+  publisher = {ACM},
+  doi       = {10.1145/3742413.3789069},
+  url       = {https://doi.org/10.1145/3742413.3789069}
+}
+```
