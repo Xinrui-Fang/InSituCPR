@@ -1,5 +1,8 @@
 # LLM-based In-situ Thought Exchanges for Critical Paper Reading (IUI' 26)
+<img width="1431" height="806" alt="teaser_IUI26" src="https://github.com/user-attachments/assets/ccf7ffcc-5ec1-413f-9f3c-baaf412887ef" />
 
+### [Project Page](https://xinrui.design/InSituCPR/) | [arXiv](https://arxiv.org/pdf/2510.15234)
+> **Abstract**: Critical reading is a primary way through which researchers develop their critical thinking skills. While exchanging thoughts and opinions with peers can strengthen critical reading, junior researchers often lack access to peers who can offer diverse perspectives. To address this gap, we designed an in-situ thought exchange interface informed by peer feedback from a formative study (N=8) to support junior researchers' critical paper reading. We evaluated the effects of thought exchanges under three conditions (no-agent, single-agent, and multi-agent) with 46 junior researchers over two weeks. Our results showed that incorporating agent-mediated thought exchanges during paper reading significantly improved participants' critical thinking scores compared to the no-agent condition. In the single-agent condition, participants more frequently made reflective annotations on the paper content. In the multi-agent condition, participants engaged more actively with agents' responses. Our qualitative analysis further revealed that participants compared and analyzed multiple perspectives in the multi-agent condition. This work contributes to understanding in-situ AI-based support for critical paper reading through thought exchanges and offers design implications for future research.
 
 ## How to start
 ### Start with Docker
