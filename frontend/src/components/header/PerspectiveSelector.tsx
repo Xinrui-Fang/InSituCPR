@@ -22,7 +22,7 @@ export default function PerspectiveSelector({
         }}
       >
         <Button size="small" color="success" style={{ pointerEvents: "none" }}>
-          Note Panel
+          Comment Panel
         </Button>
       </div>
       <div
@@ -52,7 +52,7 @@ export default function PerspectiveSelector({
         }}
       >
         <Button size="small" color="success" style={{ pointerEvents: "none" }}>
-          Q&A Panel
+          Section Panel
         </Button>
       </div>
     </>
