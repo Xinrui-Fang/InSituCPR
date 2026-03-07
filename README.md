@@ -1,7 +1,19 @@
 # LLM-based In-situ Thought Exchanges for Critical Paper Reading (IUI' 26)
+<p align="center">
+  <a href="https://xinrui.design/InSituCPR/">
+    <img src="https://img.shields.io/badge/🌐-Project_Page-4285F4?style=for-the-badge">
+  </a>
+  <a href="https://arxiv.org/pdf/2510.15234">
+    <img src="https://img.shields.io/badge/arXiv-2510.15234-b31b1b?style=for-the-badge">
+  </a>
+  <a href="https://insitucpr.org/">
+    <img src="https://img.shields.io/badge/🚀-Live_Demo-ff8c00?style=for-the-badge">
+  </a>
+</p>
+
 <img width="1431" height="806" alt="teaser_IUI26" src="https://github.com/user-attachments/assets/ccf7ffcc-5ec1-413f-9f3c-baaf412887ef" />
 
-## [Project Page](https://xinrui.design/InSituCPR/) | [arXiv](https://arxiv.org/pdf/2510.15234)
+
 > [Xinrui Fang](https://xinrui.design/)¹, [Anran Xu](https://anranxu.com/)¹², [Chi-Lan Yang](https://www.chilanyang.space/)¹, [Ya-Fang Lin](https://s103065533.wixsite.com/yafanglin)¹, [Sylvain Malacria](https://www.malacria.com/)¹³, [Koji Yatani](https://iis-lab.org/member/koji-yatani/)¹         
 > ¹ The University of Tokyo  
 ² RIKEN Center for Advanced Intelligence Project, RIKEN  
