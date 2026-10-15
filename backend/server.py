@@ -36,50 +36,62 @@ def get_manager():
 
 
 def match_field(perspective: str) -> str:
-    manager = get_manager()
-    client = manager.client   
-    response = client.chat.completions.create(
-        model="gpt-4-turbo",
-        messages=[
-            {
-                "role": "system",
-                "content": (
-                    "You are an expert in academic classification. "
-                    "Given a research perspective, match it to the most relevant field from the following list:\n\n"
-                    "Computer Science, Medicine, Chemistry, Biology, Materials Science, Physics, Geology, "
-                    "Psychology, Art, History, Geography, Sociology, Business, Political Science, Economics, "
-                    "Philosophy, Mathematics, Engineering, Environmental Science, Agricultural and Food Sciences, "
-                    "Education, Law, Linguistics."
-                    "Your response should contain only one field name from list, nothing else."
-
-                )
-            },
-            {"role": "user", "content": perspective}
-        ]
+    return get_manager().respond(
+        instructions=(
+            "You are an expert in academic classification. "
+            "Given a research perspective, match it to the most relevant field from the following list:\n\n"
+            "Computer Science, Medicine, Chemistry, Biology, Materials Science, Physics, Geology, "
+            "Psychology, Art, History, Geography, Sociology, Business, Political Science, Economics, "
+            "Philosophy, Mathematics, Engineering, Environmental Science, Agricultural and Food Sciences, "
+            "Education, Law, Linguistics."
+            "Your response should contain only one field name from list, nothing else."
+        ),
+        user_input=perspective,
     )
-    return response.choices[0].message.content
+
+SECTION_NAMES = (
+    "Research Question / Hypotheses",
+    "Limitation / Future Work",
+    "Experiment / Study",
+    "System / Design",
+    "Related Work",
+    "Introduction",
+    "Participant",
+    "Conclusion",
+    "Implication",
+    "Procedure",
+    "Measures",
+    "Analysis",
+    "Results",
+    "Method",
+    "Task",
+    "Data",
+)
+
+def canonicalize_section(raw: str) -> str:
+    cleaned = (raw or "").strip().strip("\"'`")
+    lowered = cleaned.lower()
+    for name in SECTION_NAMES:
+        if name.lower() == lowered:
+            return name
+    for name in SECTION_NAMES:
+        if name.lower() in lowered:
+            return name
+    print(f"Unrecognized section '{cleaned}', falling back to Introduction")
+    return "Introduction"
 
 def match_section(title: str) -> str:
-    manager = get_manager()
-    client = manager.client   
-    response = client.chat.completions.create(
-        model="gpt-4-turbo",
-        messages=[
-            {
-                "role": "system",
-                "content": (
-                    "You are an expert in HCI academic writing structure. "
-                    "Given a research paper title, match it to the most relevant section from the following list:\n\n"
-                    "Introduction, Related Work, Method, Data, System / Design, Research Question / Hypotheses, "
-                    "Experiment / Study, Participant, Task, Procedure, Measures, Analysis, Results, "
-                    "Implication, Limitation / Future Work, Conclusion.\n\n"
-                    "Your response should contain only one section name from the list, nothing else."
-                )
-            },
-            {"role": "user", "content": title}
-        ]
-    )
-    return response.choices[0].message.content
+    return canonicalize_section(get_manager().respond(
+        instructions=(
+            "You are an expert in HCI academic writing structure. "
+            "Given a research paper title, match it to the most relevant section from the following list:\n\n"
+            "Introduction, Related Work, Method, Data, System / Design, Research Question / Hypotheses, "
+            "Experiment / Study, Participant, Task, Procedure, Measures, Analysis, Results, "
+            "Implication, Limitation / Future Work, Conclusion.\n\n"
+            "Your response should contain only one section name from the list, nothing else."
+        ),
+        user_input=title,
+    ))
 
 def get_paper_details(corpusId):
     request_url = f"https://api.semanticscholar.org/graph/v1/paper/CorpusId:{corpusId}?fields=year,url,tldr"
@@ -191,165 +203,66 @@ def get_semantic_scholar_data():
 # POST
 @app.route('/revisedAnswerFeedback', methods=['POST'])
 def revisedAnswerFeedback():
-    manager = get_manager()
-    client = manager.client   
-    thread = client.beta.threads.create()
-
-    # Get data from request
     data = request.get_json()
     initialAnswer = data['messages']['initialAnswer']
     revisedAnswer = data['messages']['revisedAnswer']
     agreeText = data['messages']['agreeText']
     vector_store_id = data['messages']['vector_store_id']
 
-    # if receive assistant id, reuse it
-    # if not receive assistant_id, create new one
-    assistant_bot_agree = manager.create_assistant(
-        name="Research Assistant A",
-        instructions = (         
-            f"User's initial answer is '{initialAnswer}', the revised answer is '{revisedAnswer}'. "
-            f"The feedback for the initial answer is '{agreeText}'. "
-            "Based on this feedback, evaluate how well the revised answer addresses the issues or suggestions mentioned. "
-            "Provide a concise and constructive feedback on the revised answer in 100 words."
-        ),    
-        model="gpt-4o",
-        tools=[{"type": "file_search"}],
-        vector_store_id=vector_store_id,
-    )
-
-    client.beta.threads.messages.create(
-        thread.id,
-        role="user",
-        content=f"User's initial answer is '{initialAnswer}', the revised answer is '{revisedAnswer}'. "
-    )
     try:
-        # Use the create and poll SDK helper to create a run and poll the status of
-        # the run until it's in a terminal state.
-        run = client.beta.threads.runs.create_and_poll(
-            thread_id=thread.id, assistant_id=assistant_bot_agree.id
+        answer = get_manager().respond(
+            instructions=(
+                f"User's initial answer is '{initialAnswer}', the revised answer is '{revisedAnswer}'. "
+                f"The feedback for the initial answer is '{agreeText}'. "
+                "Based on this feedback, evaluate how well the revised answer addresses the issues or suggestions mentioned. "
+                "Provide a concise and constructive feedback on the revised answer in 100 words."
+            ),
+            user_input=f"User's initial answer is '{initialAnswer}', the revised answer is '{revisedAnswer}'. ",
+            vector_store_id=vector_store_id,
         )
-        # Log the run details
-        print("Run ID:", run.id)
-        print("Run Status:", run.status)
-        print("Run Created At:", run.created_at)
-        print("Run Completed At:", run.completed_at)
-
-        # Log if there are any errors with the run
-        if hasattr(run, 'error'):
-            print("Run Error:", run.error)
-        messages = list(client.beta.threads.messages.list(thread_id=thread.id, run_id=run.id))
-        if not messages:
-            return jsonify({"error": "No messages returned from the API"}), 500
-
-        message_content = messages[0].content[0].text
-        annotations = message_content.annotations
-        citations = []
-        for index, annotation in enumerate(annotations):
-            message_content.value = message_content.value.replace(annotation.text, f"[{index}]")
-            if file_citation := getattr(annotation, "file_citation", None):
-                cited_file = client.files.retrieve(file_citation.file_id)
-                citations.append(f"[{index}] {cited_file.filename}")
-
         print('running the message')
-        print(message_content.value)
-        print("\n".join(citations))
-        # message_queue.append(text)
-        return jsonify({"data": message_content.value}), 200
-
+        print(answer)
+        return jsonify({"data": answer}), 200
     except Exception as e:
-        return f"An error occurred: {str(e)}"
+        return jsonify({"error": str(e)}), 500
     
 # POST
 @app.route('/perspectives', methods=['POST'])
 def agentDiversePerspectives():
-    manager = get_manager()
-    client = manager.client   
-    thread = client.beta.threads.create()
-
-    # Get data from request
     data = request.get_json()
     text = data['messages']['text']
     agent_perspective = data['messages']['agent_perspective']
+    vector_store_id = data['messages'].get('vector_store_id')
     print(text)
 
-    # if receive assistant id, reuse it
-    # if not receive assistant_id, create new one
-    assistant_bot_agree = manager.create_assistant(
-        name="Research Assistant A",
-        instructions = (         
-            f"The reader's highlight and comment may reflect personal bias. Your task is to reframe the comment strictly from the '{agent_perspective}' perspective. "
-            "This perspective should be well-defined and logically consistent, encouraging a balanced understanding. "
-            "Focus on providing a constructive, concise response. Only provide the reframed sentence without mentioning the perspective name. "
-            "Ensure that the reframed sentence is relevant and directly addresses the reader's original comment."
-
-        ),    
-        model="gpt-4o",
-        tools=[{"type": "file_search"}],
-        vector_store_id=vector_store_id,
-    )
-
-    client.beta.threads.messages.create(
-        thread.id,
-        role="user",
-        content=text
-    )
     try:
-        # Use the create and poll SDK helper to create a run and poll the status of
-        # the run until it's in a terminal state.
-        run = client.beta.threads.runs.create_and_poll(
-            thread_id=thread.id, assistant_id=assistant_bot_agree.id
+        answer = get_manager().respond(
+            instructions=(
+                f"The reader's highlight and comment may reflect personal bias. Your task is to reframe the comment strictly from the '{agent_perspective}' perspective. "
+                "This perspective should be well-defined and logically consistent, encouraging a balanced understanding. "
+                "Focus on providing a constructive, concise response. Only provide the reframed sentence without mentioning the perspective name. "
+                "Ensure that the reframed sentence is relevant and directly addresses the reader's original comment."
+            ),
+            user_input=text,
+            vector_store_id=vector_store_id,
         )
-        # Log the run details
-        print("Run ID:", run.id)
-        print("Run Status:", run.status)
-        print("Run Created At:", run.created_at)
-        print("Run Completed At:", run.completed_at)
-
-        # Log if there are any errors with the run
-        if hasattr(run, 'error'):
-            print("Run Error:", run.error)
-        messages = list(client.beta.threads.messages.list(thread_id=thread.id, run_id=run.id))
-        if not messages:
-            return jsonify({"error": "No messages returned from the API"}), 500
-
-        message_content = messages[0].content[0].text
-        annotations = message_content.annotations
-        citations = []
-        for index, annotation in enumerate(annotations):
-            message_content.value = message_content.value.replace(annotation.text, f"[{index}]")
-            if file_citation := getattr(annotation, "file_citation", None):
-                cited_file = client.files.retrieve(file_citation.file_id)
-                citations.append(f"[{index}] {cited_file.filename}")
-
         print('running the message')
-        print(message_content.value)
-        print("\n".join(citations))
+        print(answer)
         message_queue.append(text)
-        return jsonify({"data": message_content.value}), 200
-
+        return jsonify({"data": answer}), 200
     except Exception as e:
-        return f"An error occurred: {str(e)}"
+        return jsonify({"error": str(e)}), 500
     
 
 # POST
 @app.route('/highlights', methods=['POST'])
 def agentHighlights():
-    manager = get_manager()
-    client = manager.client   
-    thread = client.beta.threads.create()
-
-    # Get data from request
     data = request.get_json()
     text = data['messages']['text']
     agent_perspective = data['messages']['agent_perspective']
     vector_store_id = data['messages']['vector_store_id']
 
     print(text)
-
-    # if receive assistant id, reuse it
-    # if not receive assistant_id, create new one
-    assistant_bot_agree = manager.create_assistant(
-        name="Research Assistant A",
 
         # Stable Performance
         # instructions = (
@@ -377,7 +290,7 @@ def agentHighlights():
         #     "These annotations should highlight why the sentence is particularly insightful, its relevance to '{agent_perspective}', and any broader implications it may have."
         # ),
 
-        instructions = (
+    instructions = (
             "Your task is to identify at least 10 sentences from the text file citesee.txt that demonstrate potential bias. "
             # "You are strictly required to limit your analysis to the first 20% of the text file content, "
             # "based on either the number of lines or the number of characters. Do not analyze any content beyond this range. "
@@ -403,145 +316,59 @@ def agentHighlights():
             "    - The potential bias: Using 'significantly outperformed' may reflect confirmation bias or selective reporting without full statistical context shared.\n"
             "10. \"A promising approach to improve such recommendations can be to incorporate semantic similarity signals into the highlighting strategy\"\n"
             "    - The potential bias: The term 'promising' implies a favorable outcome of this approach without presenting potential challenges or alternative perspectives."
-        ),
-
-
-        model="gpt-4o",
-        tools=[{"type": "file_search"}],
-        vector_store_id=vector_store_id,
-        # Intro
-        # vs_OP9zGY4Qn7hCDhSdIvROmT18
-        # Full
-        # vs_jWyWVjWUONrMgxHK1sx3MCQd
-        
-        
-    )
-
-    client.beta.threads.messages.create(
-        thread.id,
-        role="user",
-        content=text,
-        # parameters={"temperature": 0}
-    )
-    try:
-        # Use the create and poll SDK helper to create a run and poll the status of
-        # the run until it's in a terminal state.
-        run = client.beta.threads.runs.create_and_poll(
-            thread_id=thread.id, assistant_id=assistant_bot_agree.id
         )
-        # Log the run details
-        print("Run ID:", run.id)
-        print("Run Status:", run.status)
-        print("Run Created At:", run.created_at)
-        print("Run Completed At:", run.completed_at)
 
-        # Log if there are any errors with the run
-        if hasattr(run, 'error'):
-            print("Run Error:", run.error)
-        messages = list(client.beta.threads.messages.list(thread_id=thread.id, run_id=run.id))
-        if not messages:
-            return jsonify({"error": "No messages returned from the API"}), 500
-
-        message_content = messages[0].content[0].text
-        annotations = message_content.annotations
-        citations = []
-        for index, annotation in enumerate(annotations):
-            message_content.value = message_content.value.replace(annotation.text, f"[{index}]")
-            if file_citation := getattr(annotation, "file_citation", None):
-                cited_file = client.files.retrieve(file_citation.file_id)
-                citations.append(f"[{index}] {cited_file.filename}")
-
+    try:
+        answer = get_manager().respond(
+            instructions=instructions,
+            user_input=text,
+            vector_store_id=vector_store_id,
+        )
         print('running the message')
-        print(message_content.value)
-        print("\n".join(citations))
+        print(answer)
         message_queue.append(text)
-        return jsonify({"data": message_content.value}), 200
-
+        return jsonify({"data": answer}), 200
     except Exception as e:
-        return f"An error occurred: {str(e)}"
+        return jsonify({"error": str(e)}), 500
 
 
 # POST
 @app.route('/xml', methods=['POST'])
 def agentXml():
-    manager = get_manager()
-    client = manager.client   
-    thread = client.beta.threads.create()
-
-    # Get data from request
     data = request.get_json()
     text = data['messages']['text']
     agent_perspective = data['messages']['agent_perspective']
+    vector_store_id = data['messages'].get('vector_store_id')
     print(text)
 
-    # if receive assistant id, reuse it
-    # if not receive assistant_id, create new one
-    assistant_bot_agree = manager.create_assistant(
-        name="Research Assistant A",
-        instructions = (         
-            "Extract as much <s> tags from the provided XML content as possible that describe:"
-            "- Objective: Sentences explaining the goal or purpose of the research."
-            "- Result: Experiment results."
-            "- Method: Experiment Methods"
-            "- Research Question: Sentences posing the specific questions the research aims to address."
-            "- Novelty: Sentences highlighting what makes the research unique or original compared to prior work."
-            "For each extracted <s> tag, include:"
-            "### Output Requirements:"
-            "- Each extracted sentence must be formatted in the XML-like structure: <s coords=\"coords\" tag=\"Objective\">Text</s>."
-            "- The coords attribute must retain all its subparts and be included as it appears in the original <s> tag, without truncation or loss of detail."
-            "- Ensure that multi-line coords values are concatenated into a single string, separated by semicolons, as they appear in the original XML."
-            "- Do not provide additional metadata or summaries in the output."
-            "- The result should only include sentences encapsulated by <s> tags without extra labels or explanations."
-            "### Example:"
-            "<s coords=\"1,53.53,325.17,240.51,7.94;1,53.80,336.12,241.76,7.94;1,53.80,347.08,220.82,7.94\" tag=\"Objective\">This paper introduces CiteSee, a tool that provides personalized visual augmentations and context around citations.</s>"
-
-        ),    
-        model="gpt-4o",
-        tools=[{"type": "file_search"}],
-        vector_store_id=vector_store_id,
-    )
-
-    client.beta.threads.messages.create(
-        thread.id,
-        role="user",
-        content=text
-    )
     try:
-        # Use the create and poll SDK helper to create a run and poll the status of
-        # the run until it's in a terminal state.
-        run = client.beta.threads.runs.create_and_poll(
-            thread_id=thread.id, assistant_id=assistant_bot_agree.id
+        answer = get_manager().respond(
+            instructions=(
+                "Extract as much <s> tags from the provided XML content as possible that describe:"
+                "- Objective: Sentences explaining the goal or purpose of the research."
+                "- Result: Experiment results."
+                "- Method: Experiment Methods"
+                "- Research Question: Sentences posing the specific questions the research aims to address."
+                "- Novelty: Sentences highlighting what makes the research unique or original compared to prior work."
+                "For each extracted <s> tag, include:"
+                "### Output Requirements:"
+                "- Each extracted sentence must be formatted in the XML-like structure: <s coords=\"coords\" tag=\"Objective\">Text</s>."
+                "- The coords attribute must retain all its subparts and be included as it appears in the original <s> tag, without truncation or loss of detail."
+                "- Ensure that multi-line coords values are concatenated into a single string, separated by semicolons, as they appear in the original XML."
+                "- Do not provide additional metadata or summaries in the output."
+                "- The result should only include sentences encapsulated by <s> tags without extra labels or explanations."
+                "### Example:"
+                "<s coords=\"1,53.53,325.17,240.51,7.94;1,53.80,336.12,241.76,7.94;1,53.80,347.08,220.82,7.94\" tag=\"Objective\">This paper introduces CiteSee, a tool that provides personalized visual augmentations and context around citations.</s>"
+            ),
+            user_input=text,
+            vector_store_id=vector_store_id,
         )
-        # Log the run details
-        print("Run ID:", run.id)
-        print("Run Status:", run.status)
-        print("Run Created At:", run.created_at)
-        print("Run Completed At:", run.completed_at)
-
-        # Log if there are any errors with the run
-        if hasattr(run, 'error'):
-            print("Run Error:", run.error)
-        messages = list(client.beta.threads.messages.list(thread_id=thread.id, run_id=run.id))
-        if not messages:
-            return jsonify({"error": "No messages returned from the API"}), 500
-
-        message_content = messages[0].content[0].text
-        annotations = message_content.annotations
-        citations = []
-        for index, annotation in enumerate(annotations):
-            message_content.value = message_content.value.replace(annotation.text, f"[{index}]")
-            if file_citation := getattr(annotation, "file_citation", None):
-                cited_file = client.files.retrieve(file_citation.file_id)
-                citations.append(f"[{index}] {cited_file.filename}")
-
         print('running the message')
-        print(message_content.value)
-        print("\n".join(citations))
+        print(answer)
         message_queue.append(text)
-        return jsonify({"data": message_content.value}), 200
-
+        return jsonify({"data": answer}), 200
     except Exception as e:
-        return f"An error occurred: {str(e)}"
+        return jsonify({"error": str(e)}), 500
     
 # FUNCTION: backend-generatePromptOf3MultiAnswers
 def generatePromptOf3MultiAnswers(question, answer, avatars):
@@ -707,73 +534,27 @@ def generatePromptOfMultiAnswers(quote, comment, avatars):
 # POST
 @app.route('/testResponse', methods=['POST'])
 def testResponse():
-    manager = get_manager()
-    client = manager.client   
-    thread = client.beta.threads.create()
-
-    # Get data from request
     data = request.get_json()
-    
+
     question = data['messages']['question']
     answer = data['messages']['answer']
-    agent_perspective = data['messages']['agent_perspective']
     avatars = data['messages']['avatars']
     vector_store_id = data['messages']['vector_store_id']
 
     print(question)
     instructions = generatePromptOf3MultiAnswers(question, answer, avatars)
 
-    # if receive assistant id, reuse it
-    # if not receive assistant_id, create new one
-    assistant_bot_agree = manager.create_assistant(
-        name="Research Expert",
-        instructions = instructions,
-        model="gpt-4o",
-        tools=[{"type": "file_search"}],
-        vector_store_id=vector_store_id,
-    )
-
-    client.beta.threads.messages.create(
-        thread.id,
-        role="user",
-        content=f"The instructor asks a critical thinking question '{question}' and reader's answer is '{answer}'. "
-    )
     try:
-        # Use the create and poll SDK helper to create a run and poll the status of
-        # the run until it's in a terminal state.
-        run = client.beta.threads.runs.create_and_poll(
-            thread_id=thread.id, assistant_id=assistant_bot_agree.id
+        result = get_manager().respond(
+            instructions=instructions,
+            user_input=f"The instructor asks a critical thinking question '{question}' and reader's answer is '{answer}'. ",
+            vector_store_id=vector_store_id,
         )
-        # Log the run details
-        print("Run ID:", run.id)
-        print("Run Status:", run.status)
-        print("Run Created At:", run.created_at)
-        print("Run Completed At:", run.completed_at)
-
-        # Log if there are any errors with the run
-        if hasattr(run, 'error'):
-            print("Run Error:", run.error)
-        messages = list(client.beta.threads.messages.list(thread_id=thread.id, run_id=run.id))
-        if not messages:
-            return jsonify({"error": "No messages returned from the API"}), 500
-
-        message_content = messages[0].content[0].text
-        annotations = message_content.annotations
-        citations = []
-        for index, annotation in enumerate(annotations):
-            message_content.value = message_content.value.replace(annotation.text, f"[{index}]")
-            if file_citation := getattr(annotation, "file_citation", None):
-                cited_file = client.files.retrieve(file_citation.file_id)
-                citations.append(f"[{index}] {cited_file.filename}")
-
         print('running the message')
-        print(message_content.value)
-        print("\n".join(citations))
-        # message_queue.append(text)
-        return jsonify({"data": message_content.value}), 200
-
+        print(result)
+        return jsonify({"data": result}), 200
     except Exception as e:
-        return f"An error occurred: {str(e)}"
+        return jsonify({"error": str(e)}), 500
 
 def generate_example(section):
     manager = get_manager()
@@ -1084,54 +865,45 @@ def generate_example(section):
 # POST
 @app.route('/questions', methods=['POST'])
 def generateQuestions():
-    manager = get_manager()
-    client = manager.client   
-    thread = client.beta.threads.create()
+    try:
+        return _generate_questions()
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        return jsonify({"error": str(e)}), 500
 
-    # Get data from request
+def _generate_questions():
     data = request.get_json()
     text = data['messages']['text']
     vector_store_id = data['messages']['vector_store_id']
 
-    # agent_perspective = data['messages']['agent_perspective']
     matched_section = match_section(text)
     print(text)
     print(matched_section)
-    [category, few_shot_questions] = generate_example(matched_section)
+    example = generate_example(matched_section)
+    if not isinstance(example, list):
+        matched_section = "Introduction"
+        example = generate_example(matched_section)
+    [category, few_shot_questions] = example
     print(category)
-   
-    # if receive assistant id, reuse it
-    # if not receive assistant_id, create new one
-    assistant_bot_agree = manager.create_assistant(
-        name="Critical Thinking Questions Generator",
-        instructions = (
-            f"""
-            You are a critical thinking questions generator based on academic paper sections.
 
-            ### **Task**
-            1. Read the given section content carefully.
-            2. Identify the main topic and the core ideas.
-            3. Generate **only one** critical thinking question that is directly relevant to the section and aligned with the assigned category.
-            4. Ensure that the question follows the structure and tone of the example questions provided.
-            5. Return **only the question** with no extra formatting or explanation.
-            6. Ensure the question is:
-                - Clear and easy to understand for junior researchers, using simple and precise language.
-                - Logically structured and specific, avoiding vague or overly abstract expressions.
-                - Thought-provoking and rigorous, encouraging the reader to reflect critically.
+    instructions = (
+        """
+        You are a critical thinking questions generator based on academic paper sections.
 
-
-            """
-        ),
-        model="gpt-4o",
-        tools=[{"type": "file_search"}],
-        vector_store_id=vector_store_id,
-        # response_format="text"
+        ### **Task**
+        1. Read the given section content carefully.
+        2. Identify the main topic and the core ideas.
+        3. Generate **only one** critical thinking question that is directly relevant to the section and aligned with the assigned category.
+        4. Ensure that the question follows the structure and tone of the example questions provided.
+        5. Return **only the question** with no extra formatting or explanation.
+        6. Ensure the question is:
+            - Clear and easy to understand for junior researchers, using simple and precise language.
+            - Logically structured and specific, avoiding vague or overly abstract expressions.
+            - Thought-provoking and rigorous, encouraging the reader to reflect critically.
+        """
     )
-
-    client.beta.threads.messages.create(
-        thread.id,
-        role="user",
-        content=f"""
+    user_input = f"""
             ### **Input**  
             Section: {text}  
             Category: {category}
@@ -1158,43 +930,15 @@ def generateQuestions():
             **Output**  
             {few_shot_questions}
             """
+    result = get_manager().respond(
+        instructions=instructions,
+        user_input=user_input,
+        vector_store_id=vector_store_id,
     )
-    try:
-        # Use the create and poll SDK helper to create a run and poll the status of
-        # the run until it's in a terminal state.
-        run = client.beta.threads.runs.create_and_poll(
-            thread_id=thread.id, assistant_id=assistant_bot_agree.id
-        )
-        # Log the run details
-        print("Run ID:", run.id)
-        print("Run Status:", run.status)
-        print("Run Created At:", run.created_at)
-        print("Run Completed At:", run.completed_at)
-
-        # Log if there are any errors with the run
-        if hasattr(run, 'error'):
-            print("Run Error:", run.error)
-        messages = list(client.beta.threads.messages.list(thread_id=thread.id, run_id=run.id))
-        if not messages:
-            return jsonify({"error": "No messages returned from the API"}), 500
-
-        message_content = messages[0].content[0].text
-        annotations = message_content.annotations
-        citations = []
-        for index, annotation in enumerate(annotations):
-            message_content.value = message_content.value.replace(annotation.text, f"[{index}]")
-            if file_citation := getattr(annotation, "file_citation", None):
-                cited_file = client.files.retrieve(file_citation.file_id)
-                citations.append(f"[{index}] {cited_file.filename}")
-
-        print('running the message')
-        print(message_content.value)
-        print("\n".join(citations))
-        message_queue.append(text)
-        return jsonify({"data": message_content.value}), 200
-
-    except Exception as e:
-        return f"An error occurred: {str(e)}"
+    print('running the message')
+    print(result)
+    message_queue.append(text)
+    return jsonify({"data": result}), 200
 
 # POST
 ######
@@ -1202,430 +946,145 @@ def generateQuestions():
 ######
 @app.route('/commentQuestions', methods=['POST'])
 def generateCommentQuestions():
-    manager = get_manager()
-    client = manager.client   
-    thread = client.beta.threads.create()
-
-    # Get data from request
     data = request.get_json()
     text = data['messages']['text']
     vector_store_id = data['messages']['vector_store_id']
 
-    # agent_perspective = data['messages']['agent_perspective']
     print(text)
     print(generate_example(text))
 
-    # if receive assistant id, reuse it
-    # if not receive assistant_id, create new one
-    assistant_bot_agree = manager.create_assistant(
-        name="Research Assistant A",
-        instructions = (
-        "You are an instructor training junior research students in critical reading skills."
-        "Generate a concise critical thinking question for the '{text}'."
-        "The critical thinking question should about 'Why' related. Only one question, without 'and' conjunction."
-        ),   
-        model="gpt-4o",
-        tools=[{"type": "file_search"}],
-        vector_store_id=vector_store_id,
-        # response_format="text"
-    )
-
-    client.beta.threads.messages.create(
-        thread.id,
-        role="user",
-        content=text
-    )
     try:
-        # Use the create and poll SDK helper to create a run and poll the status of
-        # the run until it's in a terminal state.
-        run = client.beta.threads.runs.create_and_poll(
-            thread_id=thread.id, assistant_id=assistant_bot_agree.id
+        result = get_manager().respond(
+            instructions=(
+                "You are an instructor training junior research students in critical reading skills."
+                "Generate a concise critical thinking question for the '{text}'."
+                "The critical thinking question should about 'Why' related. Only one question, without 'and' conjunction."
+            ),
+            user_input=text,
+            vector_store_id=vector_store_id,
         )
-        # Log the run details
-        print("Run ID:", run.id)
-        print("Run Status:", run.status)
-        print("Run Created At:", run.created_at)
-        print("Run Completed At:", run.completed_at)
-
-        # Log if there are any errors with the run
-        if hasattr(run, 'error'):
-            print("Run Error:", run.error)
-        messages = list(client.beta.threads.messages.list(thread_id=thread.id, run_id=run.id))
-        if not messages:
-            return jsonify({"error": "No messages returned from the API"}), 500
-
-        message_content = messages[0].content[0].text
-        annotations = message_content.annotations
-        citations = []
-        for index, annotation in enumerate(annotations):
-            message_content.value = message_content.value.replace(annotation.text, f"[{index}]")
-            if file_citation := getattr(annotation, "file_citation", None):
-                cited_file = client.files.retrieve(file_citation.file_id)
-                citations.append(f"[{index}] {cited_file.filename}")
-
         print('running the message')
-        print(message_content.value)
-        print("\n".join(citations))
+        print(result)
         message_queue.append(text)
-        return jsonify({"data": message_content.value}), 200
-
+        return jsonify({"data": result}), 200
     except Exception as e:
-        return f"An error occurred: {str(e)}"    
+        return jsonify({"error": str(e)}), 500    
     
 # POST
 # API: /highlightReinterpret
 @app.route('/highlightReinterpret', methods=['POST'])
 def generateHighlightReinterpret():
-    manager = get_manager()
-    client = manager.client   
-    thread = client.beta.threads.create()
-
-    # Get data from request
     data = request.get_json()
     quote = data['messages']['quote']
     label = data['messages']['label']
     avatars = data['messages']['avatars']
     vector_store_id = data['messages']['vector_store_id']
-    # agent_perspective = data['messages']['agent_perspective']
-    instructions = generatePromptOfMultiReinterpret(quote,label, avatars)
+    instructions = generatePromptOfMultiReinterpret(quote, label, avatars)
 
-    # if receive assistant id, reuse it
-    # if not receive assistant_id, create new one
-    assistant_bot_agree = manager.create_assistant(
-        name="Research Assistant",
-        instructions=instructions,
-        model="gpt-4o",
-        tools=[{"type": "file_search"}],
-        vector_store_id=vector_store_id,
-        # response_format="text"
-    )
-
-    client.beta.threads.messages.create(
-        thread.id,
-        role="user",
-        content=f"The reader highlighted '{quote}' and labeled the highlight with '{label}'"
-    )
     try:
-        # Use the create and poll SDK helper to create a run and poll the status of
-        # the run until it's in a terminal state.
-        run = client.beta.threads.runs.create_and_poll(
-            thread_id=thread.id, assistant_id=assistant_bot_agree.id
+        result = get_manager().respond(
+            instructions=instructions,
+            user_input=f"The reader highlighted '{quote}' and labeled the highlight with '{label}'",
+            vector_store_id=vector_store_id,
         )
-        # Log the run details
-        print("Run ID:", run.id)
-        print("Run Status:", run.status)
-        print("Run Created At:", run.created_at)
-        print("Run Completed At:", run.completed_at)
-
-        # Log if there are any errors with the run
-        if hasattr(run, 'error'):
-            print("Run Error:", run.error)
-        messages = list(client.beta.threads.messages.list(thread_id=thread.id, run_id=run.id))
-        if not messages:
-            return jsonify({"error": "No messages returned from the API"}), 500
-
-        message_content = messages[0].content[0].text
-        annotations = message_content.annotations
-        citations = []
-        for index, annotation in enumerate(annotations):
-            message_content.value = message_content.value.replace(annotation.text, f"[{index}]")
-            if file_citation := getattr(annotation, "file_citation", None):
-                cited_file = client.files.retrieve(file_citation.file_id)
-                citations.append(f"[{index}] {cited_file.filename}")
-
         print('running the message')
-        print(message_content.value)
-        print("\n".join(citations))
-        # message_queue.append(text)
-        return jsonify({"data": message_content.value}), 200
-
+        print(result)
+        return jsonify({"data": result}), 200
     except Exception as e:
-        return f"An error occurred: {str(e)}"    
+        return jsonify({"error": str(e)}), 500    
 
 # POST
 # API: /commentAnswers
 @app.route('/commentAnswers', methods=['POST'])
 def generateCommentAnswers():
-    manager = get_manager()
-    client = manager.client   
-    thread = client.beta.threads.create()
-
-    # Get data from request
     data = request.get_json()
     quote = data['messages']['quote']
     comment = data['messages']['comment']
     avatars = data['messages']['avatars']
     vector_store_id = data['messages']['vector_store_id']
+    instructions = generatePromptOfMultiAnswers(quote, comment, avatars)
 
-    # agent_perspective = data['messages']['agent_perspective']
-    instructions = generatePromptOfMultiAnswers(quote,comment, avatars)
-
-    # if receive assistant id, reuse it
-    # if not receive assistant_id, create new one
-    assistant_bot_agree = manager.create_assistant(
-        name="Research Assistant",
-        instructions=instructions,
-        model="gpt-4o",
-        tools=[{"type": "file_search"}],
-        vector_store_id=vector_store_id,
-        # response_format="text"
-    )
-
-    client.beta.threads.messages.create(
-        thread.id,
-        role="user",
-        content=f"The reader highlights '{quote}' and leave comment: '{comment}'"
-    )
     try:
-        # Use the create and poll SDK helper to create a run and poll the status of
-        # the run until it's in a terminal state.
-        run = client.beta.threads.runs.create_and_poll(
-            thread_id=thread.id, assistant_id=assistant_bot_agree.id
+        result = get_manager().respond(
+            instructions=instructions,
+            user_input=f"The reader highlights '{quote}' and leave comment: '{comment}'",
+            vector_store_id=vector_store_id,
         )
-        # Log the run details
-        print("Run ID:", run.id)
-        print("Run Status:", run.status)
-        print("Run Created At:", run.created_at)
-        print("Run Completed At:", run.completed_at)
-
-        # Log if there are any errors with the run
-        if hasattr(run, 'error'):
-            print("Run Error:", run.error)
-        messages = list(client.beta.threads.messages.list(thread_id=thread.id, run_id=run.id))
-        if not messages:
-            return jsonify({"error": "No messages returned from the API"}), 500
-
-        message_content = messages[0].content[0].text
-        annotations = message_content.annotations
-        citations = []
-        for index, annotation in enumerate(annotations):
-            message_content.value = message_content.value.replace(annotation.text, f"[{index}]")
-            if file_citation := getattr(annotation, "file_citation", None):
-                cited_file = client.files.retrieve(file_citation.file_id)
-                citations.append(f"[{index}] {cited_file.filename}")
-
         print('running the message')
-        print(message_content.value)
-        print("\n".join(citations))
-        # message_queue.append(text)
-        return jsonify({"data": message_content.value}), 200
-
+        print(result)
+        return jsonify({"data": result}), 200
     except Exception as e:
-        return f"An error occurred: {str(e)}"    
+        return jsonify({"error": str(e)}), 500    
 
 # POST
 @app.route('/perspQuestions', methods=['POST'])
 def generatePerspQuestions():
-    manager = get_manager()
-    client = manager.client   
-    thread = client.beta.threads.create()
-
-    # Get data from request
     data = request.get_json()
     text = data['messages']['text']
     vector_store_id = data['messages']['vector_store_id']
-
-    # agent_perspective = data['messages']['agent_perspective']
     print(text)
 
-    # if receive assistant id, reuse it
-    # if not receive assistant_id, create new one
-    assistant_bot_agree = manager.create_assistant(
-        name="Research Assistant A",
-        instructions = (
-        "You are an instructor training junior research students in critical reading skills."
-        "Generate a concise critical question for the Introduction section from personalization perspective."
-        "The question should be different from '{text}'."
-        ),   
-        model="gpt-4o",
-        tools=[{"type": "file_search"}],
-        vector_store_id=vector_store_id,
-        # response_format="text"
-    )
-
-    client.beta.threads.messages.create(
-        thread.id,
-        role="user",
-        content=text
-    )
     try:
-        # Use the create and poll SDK helper to create a run and poll the status of
-        # the run until it's in a terminal state.
-        run = client.beta.threads.runs.create_and_poll(
-            thread_id=thread.id, assistant_id=assistant_bot_agree.id
+        result = get_manager().respond(
+            instructions=(
+                "You are an instructor training junior research students in critical reading skills."
+                "Generate a concise critical question for the Introduction section from personalization perspective."
+                "The question should be different from '{text}'."
+            ),
+            user_input=text,
+            vector_store_id=vector_store_id,
         )
-        # Log the run details
-        print("Run ID:", run.id)
-        print("Run Status:", run.status)
-        print("Run Created At:", run.created_at)
-        print("Run Completed At:", run.completed_at)
-
-        # Log if there are any errors with the run
-        if hasattr(run, 'error'):
-            print("Run Error:", run.error)
-        messages = list(client.beta.threads.messages.list(thread_id=thread.id, run_id=run.id))
-        if not messages:
-            return jsonify({"error": "No messages returned from the API"}), 500
-
-        message_content = messages[0].content[0].text
-        annotations = message_content.annotations
-        citations = []
-        for index, annotation in enumerate(annotations):
-            message_content.value = message_content.value.replace(annotation.text, f"[{index}]")
-            if file_citation := getattr(annotation, "file_citation", None):
-                cited_file = client.files.retrieve(file_citation.file_id)
-                citations.append(f"[{index}] {cited_file.filename}")
-
         print('running the message')
-        print(message_content.value)
-        print("\n".join(citations))
+        print(result)
         message_queue.append(text)
-        return jsonify({"data": message_content.value}), 200
-
+        return jsonify({"data": result}), 200
     except Exception as e:
-        return f"An error occurred: {str(e)}"
+        return jsonify({"error": str(e)}), 500
 
 # POST
 @app.route('/perspAnswers', methods=['POST'])
 def generatePerspAnswers():
-    manager = get_manager()
-    client = manager.client   
-    thread = client.beta.threads.create()
-
-    # Get data from request
     data = request.get_json()
     text = data['messages']['text']
     vector_store_id = data['messages']['vector_store_id']
-
-    # agent_perspective = data['messages']['agent_perspective']
     print(text)
 
-    # if receive assistant id, reuse it
-    # if not receive assistant_id, create new one
-    assistant_bot_agree = manager.create_assistant(
-        name="Research Assistant A",
-        instructions = (
-        "Generaet an asnwer from 'scientifc papers' perpsective, The answer must be within 50 words."
-        "The answer should be different from '{text}'."
-        ),   
-        model="gpt-4o",
-        tools=[{"type": "file_search"}],
-        vector_store_id=vector_store_id,
-        # response_format="text"
-    )
-
-    client.beta.threads.messages.create(
-        thread.id,
-        role="user",
-        content=text
-    )
     try:
-        # Use the create and poll SDK helper to create a run and poll the status of
-        # the run until it's in a terminal state.
-        run = client.beta.threads.runs.create_and_poll(
-            thread_id=thread.id, assistant_id=assistant_bot_agree.id
+        result = get_manager().respond(
+            instructions=(
+                "Generaet an asnwer from 'scientifc papers' perpsective, The answer must be within 50 words."
+                "The answer should be different from '{text}'."
+            ),
+            user_input=text,
+            vector_store_id=vector_store_id,
         )
-        # Log the run details
-        print("Run ID:", run.id)
-        print("Run Status:", run.status)
-        print("Run Created At:", run.created_at)
-        print("Run Completed At:", run.completed_at)
-
-        # Log if there are any errors with the run
-        if hasattr(run, 'error'):
-            print("Run Error:", run.error)
-        messages = list(client.beta.threads.messages.list(thread_id=thread.id, run_id=run.id))
-        if not messages:
-            return jsonify({"error": "No messages returned from the API"}), 500
-
-        message_content = messages[0].content[0].text
-        annotations = message_content.annotations
-        citations = []
-        for index, annotation in enumerate(annotations):
-            message_content.value = message_content.value.replace(annotation.text, f"[{index}]")
-            if file_citation := getattr(annotation, "file_citation", None):
-                cited_file = client.files.retrieve(file_citation.file_id)
-                citations.append(f"[{index}] {cited_file.filename}")
-
         print('running the message')
-        print(message_content.value)
-        print("\n".join(citations))
+        print(result)
         message_queue.append(text)
-        return jsonify({"data": message_content.value}), 200
-
+        return jsonify({"data": result}), 200
     except Exception as e:
-        return f"An error occurred: {str(e)}"
-    
+        return jsonify({"error": str(e)}), 500
 
 # POST
 @app.route('/searchQuery', methods=['POST'])
 def generateSearchQuery():
-    manager = get_manager()
-    client = manager.client   
-    thread = client.beta.threads.create()
-
-    # Get data from request
     data = request.get_json()
     text = data['messages']['text']
     vector_store_id = data['messages']['vector_store_id']
-
-    # agent_perspective = data['messages']['agent_perspective']
     print(text)
 
-    # if receive assistant id, reuse it
-    # if not receive assistant_id, create new one
-    assistant_bot_agree = manager.create_assistant(
-        name="Research Assistant A",
-        instructions = (
-        f"Generate a concise search query (max 5 words) from '{text}', without any introductory words."
-        ),   
-        model="gpt-4o",
-        tools=[{"type": "file_search"}],
-        vector_store_id=vector_store_id,
-        # response_format="text"
-    )
-
-    client.beta.threads.messages.create(
-        thread.id,
-        role="user",
-        content=text
-    )
     try:
-        # Use the create and poll SDK helper to create a run and poll the status of
-        # the run until it's in a terminal state.
-        run = client.beta.threads.runs.create_and_poll(
-            thread_id=thread.id, assistant_id=assistant_bot_agree.id
+        result = get_manager().respond(
+            instructions=f"Generate a concise search query (max 5 words) from '{text}', without any introductory words.",
+            user_input=text,
+            vector_store_id=vector_store_id,
         )
-        # Log the run details
-        print("Run ID:", run.id)
-        print("Run Status:", run.status)
-        print("Run Created At:", run.created_at)
-        print("Run Completed At:", run.completed_at)
-
-        # Log if there are any errors with the run
-        if hasattr(run, 'error'):
-            print("Run Error:", run.error)
-        messages = list(client.beta.threads.messages.list(thread_id=thread.id, run_id=run.id))
-        if not messages:
-            return jsonify({"error": "No messages returned from the API"}), 500
-
-        message_content = messages[0].content[0].text
-        annotations = message_content.annotations
-        citations = []
-        for index, annotation in enumerate(annotations):
-            message_content.value = message_content.value.replace(annotation.text, f"[{index}]")
-            if file_citation := getattr(annotation, "file_citation", None):
-                cited_file = client.files.retrieve(file_citation.file_id)
-                citations.append(f"[{index}] {cited_file.filename}")
-
         print('running the message')
-        print(message_content.value)
-        print("\n".join(citations))
+        print(result)
         message_queue.append(text)
-        return jsonify({"data": message_content.value}), 200
-
+        return jsonify({"data": result}), 200
     except Exception as e:
-        return f"An error occurred: {str(e)}"
+        return jsonify({"error": str(e)}), 500
 
 # Health check
 @app.route('/health', methods=['GET'])

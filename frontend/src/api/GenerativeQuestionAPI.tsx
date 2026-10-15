@@ -19,7 +19,18 @@ const callGenerativeQuestionAPI = async (highlightContent) => {
     });
 
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      let detail = "";
+      try {
+        const body = await response.json();
+        detail = body.error || "";
+      } catch {
+        detail = "";
+      }
+      throw new Error(
+        detail
+          ? `HTTP error! status: ${response.status}: ${detail}`
+          : `HTTP error! status: ${response.status}`,
+      );
     }
 
     const result = await response.json();
